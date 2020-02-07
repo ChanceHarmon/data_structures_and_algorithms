@@ -12,20 +12,21 @@ const search = (arr, val) => {
 }
 
 //Binary Search  Time: O(LogN)
-const search = (arr, val) => {
-  let min = 0;
-  let max = array.length - 1;
+const binarySearch = (arr, val) => {
+  let left = 0;
+  let right = arr.length - 1;
+  let middle = Math.floor((left + right) / 2);
 
-  while (min < max) {
-    let middle = Math.floor((min + max) / 2);
-    let current = arr[middle];
-    if (current < val) {
-      min = middle + 1;
-    } else if (current > val) {
-      max = middle - 1;
+  while (arr[middle] !== val && left <= right) {
+    if (val < arr[middle]) {
+      right = middle - 1;
     } else {
-      return middle;
+      left = middle + 1;
     }
+    middle = Math.floor((left + right) / 2);
   }
-  return -1
+  if (arr[middle] === val) {
+    return middle;
+  }
+  return -1;
 }
