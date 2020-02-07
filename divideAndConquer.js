@@ -18,7 +18,7 @@ const search = (arr, val) => {
 
   while (min < max) {
     let middle = Math.floor((min + max) / 2);
-    let current = array[middle];
+    let current = arr[middle];
     if (current < val) {
       min = middle + 1;
     } else if (current > val) {

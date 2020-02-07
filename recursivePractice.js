@@ -71,7 +71,7 @@ const collectOddValues = arr => {
   return newArr;
 }
 
-//return the value of the basde to the power of exponent
+//return the value of the base to the power of exponent
 const power = (base, exponent) => {
   if (exponent === 0) return 1;
   return base * power(exponent - 1);
@@ -170,10 +170,10 @@ const fullCaps = arr => {
   const result = fullCaps(arr.slice(0, -1));
   const string = arr.slice(arr.length - 1)[0][0].toUpperCase() + arr.slice(array.length - 1)[0].substr(1);
   result.push(string);
-  return res;
+  return result;
 }
 
-// given and object, find all of the numbers and convert to strings
+// given an object, find all of the numbers and convert to strings
 
 const numToStr = obj => {
   let newObj = {};
