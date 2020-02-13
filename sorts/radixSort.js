@@ -7,7 +7,7 @@
 //Helpful to make a few helper functions to implement the search
 //One is something like getDigit, helps sort them into the buckets
 
-//From stackOverflow. Floor the absolute vasloue of the num divded by the the index to the power of 10, then divide by 10 as we are working with base 10 nums. Abs helps deal with negative numbers
+//From stackOverflow. Floor the absolute value of the num divded by the the index to the power of 10, then divide by 10 as we are working with base 10 nums. Abs helps deal with negative numbers
 
 const getDigit = (num, index) => {
   return Math.floor(Math.abs(num) / Math.pow(10, index)) % 10;
