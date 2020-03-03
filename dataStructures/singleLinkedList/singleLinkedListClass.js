@@ -139,6 +139,8 @@ class SinglyLinkedList {
   }
 }
 
+module.exports = SinglyLinkedList;
+
 //Big O
 //Insertion = O(1)
 //Remove = O(1) if removing from beginning, or O(n)
