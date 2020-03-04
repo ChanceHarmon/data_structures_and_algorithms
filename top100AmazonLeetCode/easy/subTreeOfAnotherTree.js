@@ -36,6 +36,9 @@
 //Using a recursive function, we check for valid sub trees as we traverse the tree with preorder depth first
 //I do think the variables passed in should be changed. t is the subtree, and s is the main tree. This seems backwards to me, but it follows the leet code problem set. Keep that in mind when reading the code.
 
+//Big O space: O(n) We do not store anything, and we return a boolean, but use the call stack, so space will be as long as the given prime tree.
+//Big O time: O(n) Using recursion, we have to have a call for as many nodes in the main tree - the number of nodes in the sub tree. So worst case is the sub tree is a single node, and we don't find it until the last node of the prime tree.
+
 const isSubtree = (s, t) => {
   // given a node, returns whether they are the same, this is the recursive function that is called in the depth first function
   let isSame = (node1, node2) => {
