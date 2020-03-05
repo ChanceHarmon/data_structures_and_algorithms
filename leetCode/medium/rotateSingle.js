@@ -1,6 +1,6 @@
 'use strict';
 
-import SinglyLinkedList from './singleLinkedListClass';
+import SinglyLinkedList from '../../dataStructures/singleLinkedList/singleLinkedListClass';
 
 // Rotate a given single linked list by k amount of times
 //input = (list, k), or (head, k)
