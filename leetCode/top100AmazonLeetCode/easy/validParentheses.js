@@ -11,8 +11,8 @@
 // Big O space: O(n) while it technically is 2n because we are using two outside structures, this reduces down to n
 //Big O time: O(n) while we do have constant look up time, the worst case we have to traverse the whole string to prove true
 
-//const isValid = s =>
-var isValid = function (s) {
+
+const isValid = s => {
   //since we are told the string only has characters of the brackets,it needs to be even length or it is false
   //if it was a random string you would not need this check, it would give a false return of false
   if (s.length % 2 !== 0) {

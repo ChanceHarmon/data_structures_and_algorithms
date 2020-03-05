@@ -21,7 +21,8 @@
 
 // Output: 3
 
-
+//Big O space: O(1) We are not creating any new structure to return, just a count, constant space
+//Big O time: O(n^2) Nested loops gives us quadradic time 
 const numIslands = grid => {
   let count = 0;
 

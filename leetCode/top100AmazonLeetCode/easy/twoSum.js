@@ -7,7 +7,7 @@
 //Big O space: O(n) as we are constructing a hash map
 //Big O time: O(n), constant lookup to the hash map, and only looping once
 
-var twoSum = function (nums, target) {
+const twoSum = (nums, target) => {
   //initializing hash map
   const hashMap = new Map();
   for (let i = 0; i < nums.length; i++) {

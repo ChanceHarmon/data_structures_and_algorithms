@@ -10,7 +10,8 @@
 //Big O space: O(n), we will have as many stack frames as the two lists have combined elements, before we ever return
 //Big O time: O(n) beacuse we will exactly the number of recursive calls we we have elements in the two lists
 
-var mergeTwoLists = function (l1, l2) {
+const mergeTwoLists = (l1, l2) => {
+  //checking for edge cases
   if (l1 === null) return l2;
   if (l2 === null) return l1;
 

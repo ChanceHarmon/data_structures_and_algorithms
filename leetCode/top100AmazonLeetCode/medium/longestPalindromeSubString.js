@@ -12,6 +12,9 @@
 // Input: "cbbd"
 // Output: "bb"
 
+//Big O space: O(n) we are storing and building a final sub sting for return, worst case this could be the entire string from the start
+//Big O time: O(n^2) we have two nested loops inside of a while loop. They are nested in each other so we don't have n^3, but still quadratic time
+
 const longestPalindrome = s => {
   if (s.length < 2) return s; // base case
 
