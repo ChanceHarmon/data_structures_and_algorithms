@@ -40,7 +40,7 @@ class Node {
   }
 }
 
-//This is abasic implementation of a doubly linked list if you have not already seen it. The only additions are adding conditions for capacity and size, as well as creating a hashmap for constant lookup 
+//This is a basic implementation of a doubly linked list if you have not already seen it. The only additions are adding conditions for capacity and size, as well as creating a hashmap for constant lookup 
 class LRUCache {
   constructor(capacity) {
     this.capacity = capacity;
@@ -82,7 +82,7 @@ class LRUCache {
     const node = this.hashmap[key];
 
     // If key doesn't exist - return -1
-    if (node === null) return -1;
+    if (!node) return -1;
 
     // Update node to most recently used
     this.putToFront(node);
@@ -93,7 +93,7 @@ class LRUCache {
 
   putToFront(node) {
     // If the node isn't new have to remove it from the list
-    if (node.next !== null && node.prev !== null) {
+    if (node.next && node.prev) {
       const { next, prev } = node;
 
       // Link the two surrounding nodes
@@ -125,7 +125,7 @@ class LRUCache {
 
   delete(key) {
     // If key doesnt exist return
-    if (this.hashmap[key] === null) {
+    if (!this.hashmap[key]) {
       return;
     }
 
