@@ -1,4 +1,3 @@
-
 //You are given an array with a length of 8. the values will be random 1's and 0's. If both neighbors of a given index have equal values to themselves, the given index needs to swap it's current value to a 1 if it is 0, or 0 if it is a 1. If it is at the styart or end of the array, assum that [1] and [6] have a matching pair, so [0] and [7] will swap values
 
 //if  count([ 1, 0, 0, 1, 1, 1, 0, 0 ], 4)
