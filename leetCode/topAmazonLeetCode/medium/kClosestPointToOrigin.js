@@ -51,4 +51,17 @@ const kClosest = (points, K) => {
 };
 
 //Theory is true
-//Improved Big O space: O(1), we alter the given structure in place and return it, constant space
+//Improved Big O space: O(1), we alter the given structure in place and return it
+
+// const kClosest = (points, K) => {
+//   points.sort((a, b) => {
+//     //What is happening here, we getting the square root of squaring the two indexes of a - the square root of squaring the two indexes of b. then sorting a -b with those values.
+//     return Math.sqrt(Math.pow(a[0], 2) + Math.pow(a[1], 2)) - Math.sqrt(Math.pow(b[0], 2) + Math.pow(b[1], 2));
+//   });
+//   //Now that our points are is sorted, we can simply push the values up to the limit of K    
+
+//   for (let i = points.length-1; i >= K; i--) {
+//     points.pop();
+//   }
+//   return points;
+// };
