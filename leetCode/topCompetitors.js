@@ -30,27 +30,27 @@ const topNCompetitors = (numCompetitors, topNCompetitors, competitors, numReview
     compSet.set(each, 0);
   }
 
+
   //Next I want to split each instance of the reviews array, then loop through the review and check for instances of the competitors
+
   //If their is a mention, update the value of the key in the hashmap
 
-
-  //This is currently broken
   for (let i = 0; i < reviews.length; i++) {
     let review = reviews[i].split(' ');
+
     for (let j = 0; j < review.length; j++) {
-      if (compSet[review]) compSet.set(review, (map.get(review)) + 1)
+      if (compSet.has(review[j])) {
+        compSet.set(review[j], compSet.get(review[j]) + 1)
+      }
     }
   }
 
-  //Next I want to return a sorted array that contains the top mentioned competitors, with a length of topNCompetitors, in decending order. I only need the names, not the values of how many times they were mentioned.
-
-  //I believe this is working, just need to get the other function working.
-  //It is missing that I need to slice out the values and only push the keys;
-
-  let orderArray = new Array([...compSet.entries()].sort((a, b) => a[1] - b[1]));
+  let orderArray = [...compSet.entries()].sort((a, b) => b[1] - a[1]).map(x => x[0]);
   for (let i = orderArray.length - 1; i >= numReviews; i--) {
     orderArray.pop();
   }
   return orderArray;
 
 }
+
+// topNCompetitors (5, 2, ['google', 'amazon', 'facebook', 'microsoft'], 4, ['google has a home device', 'google is top-rated', 'amazon echo is the best', 'facebook is working on a home speaker', 'microsoft is also in seattle','google is catching up','amazon is still the best'])
