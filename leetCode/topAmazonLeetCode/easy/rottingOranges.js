@@ -53,7 +53,7 @@ const orangesRotting = grid => {
       let newRottens = mouthBreather(grid, rottingOranges[0], rottingOranges[1], newQueue);
       freshOranges -= newRottens;
     }
-
+    console.log(grid)
     minutes++;
     queue = newQueue;
   }
@@ -88,3 +88,5 @@ const mouthBreather = (grid, i, j, queue) => {
 
   return rotten;
 }
+
+console.log(orangesRotting([[2, 1, 1, 1], [1, 1, 1, 1], [2, 1, 1, 2], [1, 1, 2, 1]]))
