@@ -40,12 +40,35 @@ const topNCompetitors = (numCompetitors, topNCompetitors, competitors, numReview
 
     for (let j = 0; j < review.length; j++) {
       if (compSet.has(review[j])) {
-        compSet.set(review[j], compSet.get(review[j]) + 1)
+        compSet.set(review[j], compSet.get(review[j]) + 1);
+        console.log(compSet)
+        break;
       }
     }
   }
 
-  let orderArray = [...compSet.entries()].sort((a, b) => b[1] - a[1]).map(x => x[0]);
+  let compareAlphabetically = (a, b) => {
+    if (a[0] < b[0]) {
+      return - 1
+    } else if (a[0] > b[0]) {
+      return 1
+    } else {
+      return 0
+    }
+  }
+
+  let compareValues = (a, b) => {
+    if (b[1] < a[1]) {
+      return - 1
+    } else if (b[1] > a[1]) {
+      return 1
+    } else {
+      return 0
+    }
+  }
+
+  let orderArray = [...compSet.entries()].sort(compareAlphabetically).sort(compareValues).map(x => x[0]);
+
   for (let i = orderArray.length - 1; i >= numReviews; i--) {
     orderArray.pop();
   }
@@ -53,4 +76,5 @@ const topNCompetitors = (numCompetitors, topNCompetitors, competitors, numReview
 
 }
 
-// topNCompetitors (5, 2, ['google', 'amazon', 'facebook', 'microsoft'], 4, ['google has a home device', 'google is top-rated', 'amazon echo is the best', 'facebook is working on a home speaker', 'microsoft is also in seattle','google is catching up','amazon is still the best'])
+
+console.log(topNCompetitors(5, 2, ['google', 'amazon', 'facebook', 'microsoft'], 4, ['google has a home device, google it', 'google is top-rated', 'amazon echo is the best', 'facebook is working on a home speaker', 'microsoft is also in seattle', 'google is catching up', 'amazon is still the best', 'amazon is where I really want to be']))
