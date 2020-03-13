@@ -35,19 +35,19 @@ CHALLENGE 3
 Write a function named citiesAtoJ that takes in an array of city names and uses a regular expression pattern to return a new array containing any cities that begin with the letters A through J, inclusive.
 ------------------------------------------------------------------------------------------------ */
 
- const citiesAtoJ = (arr) => {
-    let newArr = [];
-  arr.forEach( (cities) => {
+const citiesAtoJ = (arr) => {
+  let newArr = [];
+  arr.forEach((cities) => {
     let regex = /^[A-J]/g;
-    if(regex.test(cities) === true) {
+    if (regex.test(cities) === true) {
       newArr.push(cities);
     }
   });
   return newArr;
-  
-   };
-   
-  
+
+};
+
+
 
 
 
@@ -66,18 +66,18 @@ Do not use the vertical bar (pipe) in your pattern.
 ------------------------------------------------------------------------------------------------ */
 
 const matchMonth = (input) => {
-   
-  
+
+
   if (input.toString().match(/^[oO]ct(ober)?$/g)) {
     return true;
   } else {
     return false;
   }
 };
-  
-  
 
-  
+
+
+
 
 
 /* ------------------------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ The expected output of "Hello, and have a wonderful day!" is ["and ", "have ", "
 ------------------------------------------------------------------------------------------------ */
 
 const noPunctuation = str => str.match(/[\w]*[\w][$ ]/g);
-  
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
@@ -106,7 +106,7 @@ For example, 'Welcome to Code 301!' will return 'W_lc_m_ t_ C_d_ 301!'.
 ------------------------------------------------------------------------------------------------ */
 
 let hangman = (str) => str.replace(/[aeiouAEIOU]/g, '_');
-  
+
 
 
 /* ------------------------------------------------------------------------------------------------
@@ -121,9 +121,7 @@ Hint: All of these words end with the letters "ells".
 
 const seashells = 'She sells seashells by the seashore. The shells she sells are surely seashells. So if she sells shells on the seashore, I\'m sure she sells seashore shells.';
 
-const findShells = (str) => {
-  // Solution code here...
-};
+const findShells = str => str.match(/(sea)?(s)(h)?(ells)/g);
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
@@ -154,7 +152,7 @@ describe('Testing challenge 2', () => {
   test('It should only return words that begin with a capital letter', () => {
     const capitalResult = isCapitalized('We only want to Return the Words that begin With a capital Letter');
 
-    expect(capitalResult).toStrictEqual([ 'We', 'Return', 'Words', 'With', 'Letter' ]);
+    expect(capitalResult).toStrictEqual(['We', 'Return', 'Words', 'With', 'Letter']);
     expect(capitalResult.length).toStrictEqual(5);
   });
 });
@@ -194,7 +192,7 @@ describe('Testing challenge 5', () => {
   const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacinia vel massa sed egestas. Nunc faucibus iaculis elit, a scelerisque enim condimentum sed. Aenean ac scelerisque sem, et pharetra diam.';
 
   test('It should only return words that are immediately followed by a space', () => {
-    expect(noPunctuation(lorem)).toStrictEqual([ 'Lorem ', 'ipsum ', 'dolor ', 'sit ', 'consectetur ', 'adipiscing ', 'Cras ', 'lacinia ', 'vel ', 'massa ', 'sed ', 'Nunc ', 'faucibus ', 'iaculis ', 'a ', 'scelerisque ', 'enim ', 'condimentum ', 'Aenean ', 'ac ', 'scelerisque ', 'et ', 'pharetra ' ]);
+    expect(noPunctuation(lorem)).toStrictEqual(['Lorem ', 'ipsum ', 'dolor ', 'sit ', 'consectetur ', 'adipiscing ', 'Cras ', 'lacinia ', 'vel ', 'massa ', 'sed ', 'Nunc ', 'faucibus ', 'iaculis ', 'a ', 'scelerisque ', 'enim ', 'condimentum ', 'Aenean ', 'ac ', 'scelerisque ', 'et ', 'pharetra ']);
     expect(noPunctuation(lorem).length).toStrictEqual(23);
   });
 
