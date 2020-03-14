@@ -195,7 +195,25 @@ const deceasedSpouses = ['Catelyn', 'Lysa', 'Robert', 'Khal Drogo', 'Alerie'];
 
 const houseSurvivors = (arr) => {
   const survivors = [];
-  // Solution code here...
+  for (let i = 0; i < arr.length; i++) {
+    let memberCount = 1;
+    if (arr[i].spouse !== null) {
+      memberCount += 1;
+    }
+    if (arr[i].children.length) {
+      memberCount += arr[i].children.length;
+    }
+    let result = arr[i];
+    for (let j = 0; j < deceasedSpouses.length; j++) {
+      if (arr[i].spouse === deceasedSpouses[j]) {
+        memberCount -= 1;
+      }
+    }
+    let newObj = {};
+    newObj.house = result.house;
+    newObj.members = memberCount;
+    survivors.push(newObj);
+  }
   return survivors;
 };
 
