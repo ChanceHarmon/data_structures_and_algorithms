@@ -114,7 +114,7 @@ The input and output of this function are the same as the input and output from 
 
 const hasChildrenEntries = (arr, character) => {
 
-  let kids = ;
+  let kids;
   arr.forEach(obj => {
     if (Object.entries(obj)[0][1] === character && Object.entries(obj)[2][1].length !== 0) {
       kids = true;
@@ -156,12 +156,79 @@ All of these objects should be added to an array named "sizes". Return the "size
 
 For example: [{ house: 'Stark', members: 7 }, { house: 'Arryn', members: 3 }, ... ].
 ------------------------------------------------------------------------------------------------ */
+// Image.all.forEach(image => {
+//   $('#image-container').append(image.render());
+// });
 
+// let characters = [
+//   {
+//     name: 'Eddard',
+//     spouse: 'Catelyn',
+//     children: ['Robb', 'Sansa', 'Arya', 'Bran', 'Rickon'],
+//     house: 'Stark'
+//   },
+//   {
+//     name: 'Jon A.',
+//     spouse: 'Lysa',
+//     children: ['Robin'],
+//     house: 'Arryn'
+//   },
+//   {
+//     name: 'Cersei',
+//     spouse: 'Robert',
+//     children: ['Joffrey', 'Myrcella', 'Tommen'],
+//     house: 'Lannister'
+//   },
+//   {
+//     name: 'Daenarys',
+//     spouse: 'Khal Drogo',
+//     children: ['Drogon', 'Rhaegal', 'Viserion'],
+//     house: 'Targaryen'
+//   },
+//   {
+//     name: 'Mace',
+//     spouse: 'Alerie',
+//     children: ['Margaery', 'Loras'],
+//     house: 'Tyrell'
+//   },
+//   {
+//     name: 'Sansa',
+//     spouse: 'Tyrion',
+//     children: [],
+//     house: 'Stark'
+//   },
+//   {
+//     name: 'Jon S.',
+//     spouse: null,
+//     children: [],
+//     house: 'Snow'
+//   }
+// ];
 const houseSize = (arr) => {
-  const sizes = [];
-  // Solution code here...
+  let sizes = [];
+
+  arr.forEach(house => {
+    sizes.push()//Object.entries
+
+  })
   return sizes;
 };
+console.log(houseSize())
+// const fizzbuzz = (arr) => {
+//   const output = [];
+//   arr.forEach(num => {
+//     if (num % 5 === 0 && num % 3 ===0) {
+//       output.push('Fizz Buzz');
+//     } else if (num % 3 ===0){
+//       output.push('Fizz');
+//     } else if (num % 5 === 0) {
+//       output.push('Buzz');
+//     } else {
+//       output.push(num);
+//     }
+//   });
+//   return output;
+// };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7 - Stretch Goal
