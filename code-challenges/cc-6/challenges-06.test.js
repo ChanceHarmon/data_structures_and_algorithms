@@ -204,31 +204,44 @@ For example: [{ house: 'Stark', members: 7 }, { house: 'Arryn', members: 3 }, ..
 //     house: 'Snow'
 //   }
 // ];
+let sizes = [];
 const houseSize = (arr) => {
-  let sizes = [];
+  const sort = (item) => {
+    let result = [item.house, item.spouse].join(' ');
+    return result;
+  }
+  //TODO So fairly lost on this as a drunk point. I know I need to basically turh earch object instance to an array index. Once I can get that I can then start to filter out the values I want, but sizes array is proving difficult without just hack arounds for console logs, nothing reallt worth it. So I have a ton of corpse code around it for ideas to research, just burnt for the night 
 
-  arr.forEach(house => {
-    sizes.push()//Object.entries
+  const helper = () => {
+    sizes.push(arr.map(sort));
+  }
+  return sizes.push(helper);
+  // function getFullName(item) {
+  //   var fullname = [item.firstname,item.lastname].join(" ");
+  //   return fullname;
+  // }
+  // function myFunction() {
+  //   document.getElementById("demo").innerHTML = persons.map(getFullName);
+  // }
 
-  })
-  return sizes;
 };
-console.log(houseSize())
-// const fizzbuzz = (arr) => {
-//   const output = [];
-//   arr.forEach(num => {
-//     if (num % 5 === 0 && num % 3 ===0) {
-//       output.push('Fizz Buzz');
-//     } else if (num % 3 ===0){
-//       output.push('Fizz');
-//     } else if (num % 5 === 0) {
-//       output.push('Buzz');
-//     } else {
-//       output.push(num);
-//     }
-//   });
-//   return output;
-// };
+
+//console.log((houseSize(characters)))
+// let kvArray = [{key: 1, value: 10}, 
+//   {key: 2, value: 20}, 
+//   {key: 3, value: 30}]
+
+// let reformattedArray = kvArray.map(obj => {
+// let rObj = {}
+// rObj[obj.key] = obj.value
+// return rObj
+// })
+// reformattedArray is now [{1: 10}, {2: 20}, {3: 30}], 
+
+// kvArray is still: 
+// [{key: 1, value: 10}, 
+//  {key: 2, value: 20}, 
+//  {key: 3, value: 30}]
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7 - Stretch Goal
