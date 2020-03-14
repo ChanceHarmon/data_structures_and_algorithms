@@ -156,92 +156,24 @@ All of these objects should be added to an array named "sizes". Return the "size
 
 For example: [{ house: 'Stark', members: 7 }, { house: 'Arryn', members: 3 }, ... ].
 ------------------------------------------------------------------------------------------------ */
-// Image.all.forEach(image => {
-//   $('#image-container').append(image.render());
-// });
-
-// let characters = [
-//   {
-//     name: 'Eddard',
-//     spouse: 'Catelyn',
-//     children: ['Robb', 'Sansa', 'Arya', 'Bran', 'Rickon'],
-//     house: 'Stark'
-//   },
-//   {
-//     name: 'Jon A.',
-//     spouse: 'Lysa',
-//     children: ['Robin'],
-//     house: 'Arryn'
-//   },
-//   {
-//     name: 'Cersei',
-//     spouse: 'Robert',
-//     children: ['Joffrey', 'Myrcella', 'Tommen'],
-//     house: 'Lannister'
-//   },
-//   {
-//     name: 'Daenarys',
-//     spouse: 'Khal Drogo',
-//     children: ['Drogon', 'Rhaegal', 'Viserion'],
-//     house: 'Targaryen'
-//   },
-//   {
-//     name: 'Mace',
-//     spouse: 'Alerie',
-//     children: ['Margaery', 'Loras'],
-//     house: 'Tyrell'
-//   },
-//   {
-//     name: 'Sansa',
-//     spouse: 'Tyrion',
-//     children: [],
-//     house: 'Stark'
-//   },
-//   {
-//     name: 'Jon S.',
-//     spouse: null,
-//     children: [],
-//     house: 'Snow'
-//   }
-// ];
-let sizes = [];
 const houseSize = (arr) => {
-  const sort = (item) => {
-    let result = [item.house, item.spouse].join(' ');
-    return result;
+  let sizes = [];
+  for (let i = 0; i < arr.length; i++) {
+    let memberCount = 1;
+    if (arr[i].spouse !== null) {
+      memberCount += 1;
+    }
+    if (arr[i].children.length) {
+      memberCount += arr[i].children.length;
+    }
+    let result = arr[i];
+    let newObj = {};
+    newObj.house = result.house;
+    newObj.members = memberCount;
+    sizes.push(newObj);
   }
-  //TODO So fairly lost on this as a drunk point. I know I need to basically turh earch object instance to an array index. Once I can get that I can then start to filter out the values I want, but sizes array is proving difficult without just hack arounds for console logs, nothing reallt worth it. So I have a ton of corpse code around it for ideas to research, just burnt for the night 
-
-  const helper = () => {
-    sizes.push(arr.map(sort));
-  }
-  return sizes.push(helper);
-  // function getFullName(item) {
-  //   var fullname = [item.firstname,item.lastname].join(" ");
-  //   return fullname;
-  // }
-  // function myFunction() {
-  //   document.getElementById("demo").innerHTML = persons.map(getFullName);
-  // }
-
-};
-
-//console.log((houseSize(characters)))
-// let kvArray = [{key: 1, value: 10}, 
-//   {key: 2, value: 20}, 
-//   {key: 3, value: 30}]
-
-// let reformattedArray = kvArray.map(obj => {
-// let rObj = {}
-// rObj[obj.key] = obj.value
-// return rObj
-// })
-// reformattedArray is now [{1: 10}, {2: 20}, {3: 30}], 
-
-// kvArray is still: 
-// [{key: 1, value: 10}, 
-//  {key: 2, value: 20}, 
-//  {key: 3, value: 30}]
+  return sizes;
+}
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7 - Stretch Goal
