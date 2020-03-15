@@ -9,8 +9,8 @@ Note: You may not use the array's built-in length property.
 ------------------------------------------------------------------------------------------------ */
 
 const countNumberOfElements = (arr) => {
-  return arr.reduce( function(accumulator,value,idx) {
-    accumulator = idx+1;
+  return arr.reduce(function (accumulator, value, idx) {
+    accumulator = idx + 1;
     return accumulator;
   }, 0);
 };
@@ -39,7 +39,8 @@ let starWarsData = [{
   skin_color: 'gold',
   eye_color: 'yellow',
   birth_year: '112BBY',
-  gender: 'n/a'},
+  gender: 'n/a'
+},
 {
   name: 'R2-D2',
   height: '96',
@@ -89,7 +90,7 @@ Note: You must use reduce for this challenge. You may not use the built-in .reve
 ------------------------------------------------------------------------------------------------ */
 
 const reversedString = (arr) => {
-  const result = arr.split('').reduce( (elements, value) => {
+  const result = arr.split('').reduce((elements, value) => {
     elements.unshift(value);
     return elements;
   }, []).join('');
@@ -145,8 +146,8 @@ const characters = [
   },
 ];
 
-const countNumberOfChildren = (arr) => arr.reduce( (elements,value) => {
-  if(value.children) {
+const countNumberOfChildren = (arr) => arr.reduce((elements, value) => {
+  if (value.children) {
     elements += value.children.length;
   }
   return elements;
@@ -163,11 +164,11 @@ Hint: The accumulator should begin as { count: 0, sum: 0 }
 ------------------------------------------------------------------------------------------------ */
 
 const calculateAverage = (arr) => {
-  let total = arr.reduce( function(accumulator,value,idx) {
-    accumulator = accumulator+value;
+  let total = arr.reduce(function (accumulator, value, idx) {
+    accumulator = accumulator + value;
     return accumulator;
   }, 0);
-  return total/(arr.length)
+  return total / (arr.length)
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -187,9 +188,9 @@ const isPrime = (value) => {
   return value > 1;
 };
 
-const countPrimeNumbers = (arr) => arr.reduce((elements,value) =>{
-  
-  if(isPrime(value)) {
+const countPrimeNumbers = (arr) => arr.reduce((elements, value) => {
+
+  if (isPrime(value)) {
     elements++;
   }
   return elements;
@@ -235,7 +236,12 @@ const snorlaxData = {
 };
 
 const extractStat = (statName, arr) => {
-  // Solution code here...
+  return arr.reduce((accumulator, element) => {
+    if (statName === element.stat.name) {
+      accumulator = element;
+    }
+    return accumulator;
+  }, 0);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -247,10 +253,66 @@ Write a function named extractChildren that, given the array of characters from 
 
 2) Then, uses reduce to return an array of all the children's names in the filtered array
 ------------------------------------------------------------------------------------------------ */
-
 const extractChildren = (arr) => {
-  // Solution code here...
-};
+  let returnArray = [];
+  const firstFilter = (value) => {
+    if (value.name.match(/a/gi)) {
+      returnArray.push(value.name)
+    }
+  }
+  const secondFilter = (value) => {
+    if (value.spouse === null) return -1;
+    else if (value.spouse.match(/a/gi)) {
+      returnArray.push(value.spouse)
+    }
+  }
+  const thirdFilter = (value) => {
+    let kids = value.children;
+    if (kids === undefined) return -1
+    for (let i = 0; i < kids.length; i++) {
+      if (kids[i].match(/a/gi)) {
+        returnArray.push(kids[i])
+      }
+    }
+  }
+
+  arr.filter(firstFilter)
+  arr.filter(secondFilter)
+  arr.filter(thirdFilter)
+
+  //This whole next function should be reduce, not triple nested loops
+  let finishForASec = [];
+
+  const isChild = (value, arr) => {
+    for (let i = 0; i < value.length; i++) {
+      for (let j = 0; j < arr.length; j++) {
+        if (value[i] === arr[j].name) {
+          if (arr[j].children === undefined) return -1;
+          for (let k = 0; k < arr[j].children.length; k++) {
+            finishForASec.push(arr[j].children[k])
+          }
+        }
+      }
+    }
+    return finishForASec;
+  }
+  isChild(returnArray, arr);
+  return finishForASec
+}
+extractChildren(characters)
+
+//I don't believe this is correct, because the problem says that ALL characters are to be in the filtered array, not just the first name of the house hold. Am I wrong?
+
+// const extractChildren = (arr) => {
+//   
+//   return arr.filter(character => character.name.indexOf('a') >= 0).reduce((accumulator, current) => {
+//     if (current.children) {
+//       return accumulator.concat(current.children);
+//     }
+//     return accumulator;
+//   }, []);
+//   
+// };
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
@@ -270,7 +332,7 @@ describe('Testing challenge 1', () => {
 
 describe('Testing challenge 2', () => {
   test('It should return an array continaing the names of the characters', () => {
-    expect(returnNames(starWarsData)).toStrictEqual([ 'Luke Skywalker', 'C-3PO', 'R2-D2', 'Darth Vader', 'Leia Organa' ]);
+    expect(returnNames(starWarsData)).toStrictEqual(['Luke Skywalker', 'C-3PO', 'R2-D2', 'Darth Vader', 'Leia Organa']);
     expect(returnNames(starWarsData).length).toStrictEqual(5);
   });
 });
@@ -289,7 +351,7 @@ describe('Testing challenge 4', () => {
 
 describe('Testing challenge 5', () => {
   test('It should return the average of the numbers in the array', () => {
-    expect(calculateAverage([18, 290, 37, 4, 55, 16, 7, 85 ])).toStrictEqual(64);
+    expect(calculateAverage([18, 290, 37, 4, 55, 16, 7, 85])).toStrictEqual(64);
   });
 });
 
@@ -307,7 +369,7 @@ describe('Testing challenge 7', () => {
 
 describe('Testing challenge 8', () => {
   test('It should return an array containing the names of the children', () => {
-    expect(extractChildren(characters)).toStrictEqual([ 'Robb', 'Sansa', 'Arya', 'Bran', 'Rickon', 'Drogon', 'Rhaegal', 'Viserion', 'Margaery', 'Loras' ]);
+    expect(extractChildren(characters)).toStrictEqual(['Robb', 'Sansa', 'Arya', 'Bran', 'Rickon', 'Drogon', 'Rhaegal', 'Viserion', 'Margaery', 'Loras']);
     expect(extractChildren(characters).length).toStrictEqual(10);
   });
 });
