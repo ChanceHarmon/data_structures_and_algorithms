@@ -297,7 +297,6 @@ const extractChildren = (arr) => {
     return finishForASec;
   }
   isChild(returnArray, arr);
-  //return finishForASec
 }
 extractChildren(characters)
 
