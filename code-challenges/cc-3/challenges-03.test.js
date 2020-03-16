@@ -125,13 +125,11 @@ const sortPeople = (arr) => {
     if (a.lastName !== b.lastName) {
       return a.lastName > b.lastName ? 1 : -1;
     }
-    else if (a.firstName.to !== b.firstName) {
-      return a.firstName > b.firstName ? 0 : 0;
-    } else (a.age !== b.age); {
-      return a.age > b.age ? 0 : 0;
+    else if (a.firstName !== b.firstName) {
+      return a.firstName > b.firstName //? 0 : 0;
+    } else if (a.age !== b.age) {
+      return a.age > b.age //? 0 : 0;
     }
-
-
   });
   return arr
 };
@@ -185,7 +183,6 @@ const meetings = [
 
 const sortMeetingsByDay = (arr) => {
   const dayOrderForSort = { 'Sunday': 1, 'Monday': 2, 'Tuesday': 3, 'Wednesday': 4, 'Thursday': 5, 'Friday': 6, 'Saturday': 7 };
-
   arr.sort((a, b) => { return dayOrderForSort[a.dayOfWeek] - dayOrderForSort[b.dayOfWeek] });
   return arr;
 };

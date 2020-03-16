@@ -9,9 +9,10 @@ If the PIN is four numerical digits long, return true. Otherwise, return false.
 ------------------------------------------------------------------------------------------------ */
 
 const validatePin = (pin) => {
-  if (!typeof pin === "number"){return false;}else{
+  if (!typeof pin === "number") { return false; } else {
     let nip = pin.toString();
-    if(nip.match(/^\d{4}$/)){return true;}else{return false;};} 
+    if (nip.match(/^\d{4}$/)) { return true; } else { return false; };
+  }
 
 };
 
@@ -67,7 +68,16 @@ findTagNames(['<div><h1>Hello, world!</h1></div>', '<p>Welcome to my site</p>'])
 ------------------------------------------------------------------------------------------------ */
 
 const findTagNames = elements => {
-  // Solution code here...
+  let output = [];
+  let regex = /\/[a-zA-Z0-9]*/g;
+  for (let i = 0; i < elements.length; i++) {
+    let firstString = elements[i].match(regex);
+    if (firstString) {
+      output.push(firstString)
+    }
+  }
+  //return output.reduce((acc, val) => acc.concat(val), [])
+  return output.flat();
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -110,7 +120,7 @@ describe('Testing challenge 2', () => {
     expect(validateEmail('joe.schmoe@codefellows.net')).toBeTruthy();
   });
 
-  test ('It should fail things that aren\'t email addresses', () => {
+  test('It should fail things that aren\'t email addresses', () => {
     expect(validateEmail('justastring')).toBeFalsy();
     expect(validateEmail('missing@adomain')).toBeFalsy();
     expect(validateEmail('@noname.com')).toBeFalsy();
@@ -149,9 +159,9 @@ describe('Testing challenge 3', () => {
 
 describe('Testing challenge 4', () => {
   test('It should return the closing tags', () => {
-    expect(findTagNames(['<h1>Hello, world!</h1>', '<p>Welcome to my site</p>'])).toStrictEqual([ '/h1', '/p' ]);
+    expect(findTagNames(['<h1>Hello, world!</h1>', '<p>Welcome to my site</p>'])).toStrictEqual(['/h1', '/p']);
   });
   test('It should work if there are multiple closing tags in a single string', () => {
-    expect(findTagNames(['<div><h1>Hello, world!</h1></div>', '<p>Welcome to my site</p>'])).toStrictEqual([ '/h1', '/div', '/p' ]);
+    expect(findTagNames(['<div><h1>Hello, world!</h1></div>', '<p>Welcome to my site</p>'])).toStrictEqual(['/h1', '/div', '/p']);
   });
 });

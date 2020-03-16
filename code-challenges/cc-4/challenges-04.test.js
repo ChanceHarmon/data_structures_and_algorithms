@@ -13,6 +13,7 @@ For example:
 ------------------------------------------------------------------------------------------------ */
 
 const isNum = (input) => {
+
   return input.toString().match(/\d/) ? 1 : 0;
 };
 
@@ -24,10 +25,14 @@ Write a function named isCapitalized that takes in a string. This function shoul
 Return an array containing all the matches.
 ------------------------------------------------------------------------------------------------ */
 
-const isCapitalized = (str) => {
-  const arr = str.match(/([A-Z][a-z]*)/g);
-  return arr;
-};
+// const isCapitalized = (str) => {
+//   const arr = str.match(/([A-Z][a-z]*)/g);
+//   return arr;
+// };
+const isCapitalized = str => {
+  let regex = /[A-Z][a-zA-Z]*/g;
+  return str.match(regex);
+}
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
