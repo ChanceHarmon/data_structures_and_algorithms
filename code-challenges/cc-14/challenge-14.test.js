@@ -9,12 +9,12 @@ For example, ['apple', 'banana', 'MacGyver'] returns ['Apple', 'Banana', 'MacGyv
 ------------------------------------------------------------------------------------------------ */
 
 const toTitleCase = (arr) => {
-  
-  let newArray=[];
-  arr.forEach(function(v){
-    newArray.push(v.replace(v[0],v.charAt(0).toUpperCase()));
-   });
-   return newArray;
+
+  let newArray = [];
+  arr.forEach(function (v) {
+    newArray.push(v.replace(v[0], v.charAt(0).toUpperCase()));
+  });
+  return newArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ let starWarsData = [{
 }];
 
 let biggerThanLuke = (arr) => {
-  return arr.filter(big=>parseInt(big.height)>172).map(big=>big.name).join().replace(',',' - ');
+  return arr.filter(big => parseInt(big.height) > 172).map(big => big.name).join().replace(',', ' - ');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -109,8 +109,8 @@ This data could be sorted by name or price.
 const sortBy = (property, arr) => arr.sort((a, b) => {
   if (a[property] > b[property]) {
     return 1;
-  } else { 
-    return -1; 
+  } else {
+    return -1;
   }
 });
 
@@ -148,7 +148,25 @@ Here is a sample board:
 ------------------------------------------------------------------------------------------------ */
 
 const detectTicTacToeWin = (board) => {
-  // Solution code here...
+  const helpCheck = (row1, col1, row2, col2, row3, col3) => {
+    //edge case of a cell is empmty
+    return board[row1][col1] !== '' &&
+      board[row1][col1] === board[row2][col2] &&
+      board[row2][col2] === board[row3][col3];
+  };
+
+  if (helpCheck(0, 0, 0, 1, 0, 2)) return true; // top row
+  if (helpCheck(1, 0, 1, 1, 1, 2)) return true; // middle row
+  if (helpCheck(2, 0, 2, 1, 2, 2)) return true; // bottom row
+
+  if (helpCheck(0, 0, 1, 0, 2, 0)) return true; // left column
+  if (helpCheck(0, 1, 1, 1, 2, 1)) return true; // center column
+  if (helpCheck(0, 2, 1, 2, 2, 2)) return true; // right column
+
+  if (helpCheck(0, 0, 1, 1, 2, 2)) return true; // top left diagonal
+  if (helpCheck(0, 2, 1, 1, 2, 0)) return true; // top right diagonal
+
+  return false;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -165,7 +183,7 @@ Run your tests from the console: jest challenge-14.test.js
 describe('Testing challenge 1', () => {
   test('It should convert each word to title case', () => {
     const words = ['apple', 'banana', 'MacGyver'];
-    expect(toTitleCase(words)).toStrictEqual(['Apple','Banana','MacGyver']);
+    expect(toTitleCase(words)).toStrictEqual(['Apple', 'Banana', 'MacGyver']);
 
     expect(toTitleCase([])).toStrictEqual([]);
   });
@@ -182,13 +200,13 @@ describe('Testing challenge 3', () => {
   test('It should sort items by a price', () => {
 
     expect(sortBy('price', [
-      {name: 'Sweatshirt', price: 45},
-      {name: 'Bookmark', price: 2.50},
-      {name: 'Tote bag', price: 15}
+      { name: 'Sweatshirt', price: 45 },
+      { name: 'Bookmark', price: 2.50 },
+      { name: 'Tote bag', price: 15 }
     ])).toStrictEqual([
-      {name: 'Bookmark', price: 2.50},
-      {name: 'Tote bag', price: 15},
-      {name: 'Sweatshirt', price: 45},
+      { name: 'Bookmark', price: 2.50 },
+      { name: 'Tote bag', price: 15 },
+      { name: 'Sweatshirt', price: 45 },
     ]);
 
   });
@@ -196,13 +214,13 @@ describe('Testing challenge 3', () => {
   test('It should sort items by name', () => {
 
     expect(sortBy('name', [
-      {name: 'Sweatshirt', price: 45},
-      {name: 'Bookmark', price: 2.50},
-      {name: 'Tote bag', price: 15}
+      { name: 'Sweatshirt', price: 45 },
+      { name: 'Bookmark', price: 2.50 },
+      { name: 'Tote bag', price: 15 }
     ])).toStrictEqual([
-      {name: 'Bookmark', price: 2.50},
-      {name: 'Sweatshirt', price: 45},
-      {name: 'Tote bag', price: 15},
+      { name: 'Bookmark', price: 2.50 },
+      { name: 'Sweatshirt', price: 45 },
+      { name: 'Tote bag', price: 15 },
     ]);
   });
 });
