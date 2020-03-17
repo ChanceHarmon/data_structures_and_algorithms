@@ -294,23 +294,22 @@ const extractChildren = (arr) => {
         }
       }
     }
-    return finishForASec;
   }
   isChild(returnArray, arr);
+  return finishForASec;
 }
-extractChildren(characters)
 
 //I don't believe this is correct, because the problem says that ALL characters are to be in the filtered array, not just the first name of the house hold. Am I wrong?
 
 // const extractChildren = (arr) => {
-//   
+
 //   return arr.filter(character => character.name.indexOf('a') >= 0).reduce((accumulator, current) => {
 //     if (current.children) {
 //       return accumulator.concat(current.children);
 //     }
 //     return accumulator;
 //   }, []);
-//   
+
 // };
 
 /* ------------------------------------------------------------------------------------------------
