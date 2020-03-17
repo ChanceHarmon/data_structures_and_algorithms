@@ -172,6 +172,11 @@ const sortByDay = (arr) => {
   return newArray;
 };
 
+// Apparently this can be solved in one line
+// const sortByDay = arr => daysOfWeek.map(day => arr.filter(event => event.includes(day)));
+// Sad face...
+
+
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 10 - Stretch Goal
 
@@ -181,8 +186,18 @@ For example, ['abcd', 'efgh', 'ijkl', 'mnop'] returns ['a', 'f', 'k', 'p']
 ------------------------------------------------------------------------------------------------ */
 
 const characterByIndex = (arr) => {
-  // Solution code here...
+  let startLetter = 0;
+  for (let i = 0; i < arr.length; i++) {
+    let compare = `${arr[i]}[${startLetter}]`;
+    arr[i] = compare[startLetter];
+    startLetter++
+  }
+  return arr;
 };
+
+// Also can be solved in a one liner, but I feel like the above is more readable
+
+// One liner = const characterByIndex = arr => arr.map((element, index) => element.charAt(index));
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
