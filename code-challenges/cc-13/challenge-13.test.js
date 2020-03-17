@@ -9,7 +9,7 @@ For example, ['this is great :)', 'wow', 'whyyyyyy :(', ':)))))'] returns ['t', 
 ------------------------------------------------------------------------------------------------ */
 
 const firstLetters = (arr) => {
-  return arr.map(v=>v.charAt(0));
+  return arr.map(v => v.charAt(0));
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -21,10 +21,10 @@ For example, ['this is great :)', 'wow', 'whyyyyyy :(', ':)))))'] returns ['this
 ------------------------------------------------------------------------------------------------ */
 
 const findHappiness = (arr) => {
-  return arr.filter(function(v){
-    if (v.includes(':)')===true)
-    return v;
-    })
+  return arr.filter(function (v) {
+    if (v.includes(':)') === true)
+      return v;
+  })
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -46,9 +46,9 @@ For example, 'abcdefg' returns 'bdf'
 
 const onlyOddChars = (str) => {
   let output = '';
-  for(let i= 1; i< str.length; i  +=2){
-  output += str.charAt(i);
-}
+  for (let i = 1; i < str.length; i += 2) {
+    output += str.charAt(i);
+  }
   return output;
 }
 
@@ -68,8 +68,8 @@ Write a function named findAnything that takes in an array of strings, along wit
 
 const findAnything = (arr, target) => {
   let banana = [];
-  for (let i = 0; i<arr.length; i++){
-    if(arr[i].includes(target))banana.push(arr[i]);
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].includes(target)) banana.push(arr[i]);
   }
   return banana;
 };
@@ -126,7 +126,50 @@ For example, ['Tuesday', 'Monday', 'Wednesday and Thursday', 'Tuesday 2', 'Thurs
 const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 const sortByDay = (arr) => {
-  // Solution code here...
+  let sundayRegex = /.*[S][u][n].*/g;
+  let mondayRegex = /.*[M][o][n].*/g;
+  let tuesdayRegex = /.*[T][u][e].*/g;
+  let wednesdayRegex = /.*[W][e][d].*/g;
+  let thursdayRegex = /.*[T][h][u].*/g;
+  let fridayRegex = /.*[F][r][i].*/g;
+  let saturdayRegex = /.*[S][a][t].*/g;
+  let newArray = Array.from({ length: 7 }, () => []);
+
+  for (let i = 0; i < arr.length; i++) {
+    let current = arr[i].match(mondayRegex);
+    if (current) {
+      newArray[0].push(current)
+    }
+    current = arr[i].match(tuesdayRegex);
+    if (current) {
+      newArray[1].push(current)
+    }
+    current = arr[i].match(wednesdayRegex);
+    if (current) {
+      newArray[2].push(current)
+    }
+    current = arr[i].match(thursdayRegex);
+    if (current) {
+      newArray[3].push(current)
+    }
+    current = arr[i].match(fridayRegex);
+    if (current) {
+      newArray[4].push(current)
+    }
+    current = arr[i].match(saturdayRegex);
+    if (current) {
+      newArray[5].push(current)
+    }
+    current = arr[i].match(sundayRegex);
+    if (current) {
+      newArray[6].push(current)
+    }
+  }
+  for (let i = 0; i < newArray.length; i++) {
+    let newIndex = newArray[i].flat();
+    newArray[i] = newIndex;
+  }
+  return newArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -156,7 +199,7 @@ describe('Testing challenge 1', () => {
   test('It should return the first letter of each element of the array', () => {
     const words = ['apple', 'banana', 'cantaloupe'];
 
-    expect(firstLetters(words)).toStrictEqual(['a','b','c']);
+    expect(firstLetters(words)).toStrictEqual(['a', 'b', 'c']);
     expect(firstLetters(['a', 'b', 'c', 'd'])).toStrictEqual(['a', 'b', 'c', 'd']);
     expect(firstLetters([])).toStrictEqual([]);
   });
