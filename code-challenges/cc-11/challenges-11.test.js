@@ -78,6 +78,7 @@ const findTagNames = elements => {
   }
   //return output.reduce((acc, val) => acc.concat(val), [])
   return output.flat();
+  //both returns are the same, but repl doesn't  like .flat();
 };
 
 /* ------------------------------------------------------------------------------------------------
