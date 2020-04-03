@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STUFF GOES HERE</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+    }
+
+    #c {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="c"></canvas>
+  ​
+  <script src="https://threejs.org/build/three.js"></script>
+  <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://threejs.org/examples/js/loaders/GLTFLoader.js"></script>
+  <!--script src="https://github.com/imaya/zlib.js/blob/develop/bin/inflate.min.js"></script-->
+  <script src="https://threejs.org/examples/js/loaders/RGBELoader.js"></script>
+  <script src="https://threejs.org/examples/js/loaders/FBXLoader.js"></script>
+  <script src="https://threejs.org/examples/js/loaders/DRACOLoader.js"></script>
+  <script src="https://threejs.org/examples/js/loaders/SVGLoader.js"></script>
+  <script src="https://threejs.org/examples/js/geometries/DecalGeometry.js"></script>
+  <script src="https://threejs.org/examples/js/utils/BufferGeometryUtils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dat.gui@0.7.6/build/dat.gui.min.js"></script>
+  ​
+  <script>
+    const main = () => {
+      const canvas = document.querySelector("#c");
+      const renderer = new THREE.WebGLRenderer({ canvas });
+
+      const FOV = 75;
+      const aspect = 2;
+      const near = 0.1;
+      const far = 5000;
+      const camera = new THREE.PerspectiveCamera(FOV, aspect, near, far);
+
+      camera.position.set(0, 50, 0);
+      camera.up.set(0, 0, 1);
+      camera.lookAt(0, 0, 0);
+
+      renderer.shadowMap.enabled = true;
+
+      const scene = new THREE.Scene();
+
+      const planets = [];
+
+      const radius = 1;
+      const widthSegments = 20;
+      const heightSegments = 20;
+      const sphereGeometry = new THREE.SphereBufferGeometry(radius, widthSegments, heightSegments);
+
+      const solarSystem = new THREE.Object3D();
+      scene.add(solarSystem);
+
+      planets.push(solarSystem);
+
+      const sunMaterial = new THREE.MeshPhongMaterial({ emissive: 0xfbd504 });
+      const sunMesh = new THREE.Mesh(sphereGeometry, sunMaterial);
+      sunMesh.scale.set(5, 5, 5); //make the sun big!!
+      solarSystem.add(sunMesh);
+      planets.push(sunMesh);
+
+      const earthOrbit = new THREE.Object3D();
+      earthOrbit.position.x = 15;
+      solarSystem.add(earthOrbit);
+      planets.push(earthOrbit);
+
+      const earthMaterial = new THREE.MeshPhongMaterial({ color: 0x2233ff, emissive: 0x112244 });
+      const earthMesh = new THREE.Mesh(sphereGeometry, earthMaterial);
+      earthOrbit.add(earthMesh);
+      planets.push(earthMesh);
+
+      const moonOrbit = new THREE.Object3D();
+      moonOrbit.position.x = 2;
+      earthOrbit.add(moonOrbit);
+      planets.push(moonOrbit);
+
+      const moonMaterial = new THREE.MeshPhongMaterial({ color: 0x888888, emissive: 0x222222 });
+      const moonMesh = new THREE.Mesh(sphereGeometry, moonMaterial);
+      moonMesh.scale.set(0.3, 0.3, 0.3);
+      moonOrbit.add(moonMesh);
+      planets.push(moonMesh);
+
+      const marsOrbit = new THREE.Object3D();
+      marsOrbit.position.x = 25;
+      solarSystem.add(marsOrbit);
+
+      const marsMaterial = new THREE.MeshPhongMaterial({ color: "red", emissive: 'red' });
+      const marsMesh = new THREE.Mesh(sphereGeometry, marsMaterial);
+      marsMesh.scale.set(.8, .8, .8);
+      marsOrbit.add(marsMesh);
+      planets.push(marsMesh);
+
+
+      const jupiterOrbit = new THREE.Object3D();
+      jupiterOrbit.position.x = 55;
+      solarSystem.add(jupiterOrbit);
+
+      const jupiterMaterial = new THREE.MeshPhongMaterial({ color: "green", emissive: 'green' });
+      const jupiterMesh = new THREE.Mesh(sphereGeometry, jupiterMaterial);
+      jupiterMesh.scale.set(3.5, 3.5, 3.5);
+      jupiterOrbit.add(jupiterMesh);
+      planets.push(jupiterMesh);
+
+      const saturnOrbit = new THREE.Object3D();
+      saturnOrbit.position.x = 80;
+      solarSystem.add(saturnOrbit);
+
+      const saturnMaterial = new THREE.MeshPhongMaterial({ color: "beige", emissive: 0xfbd504 });
+      const saturnMesh = new THREE.Mesh(sphereGeometry, saturnMaterial);
+      saturnMesh.scale.set(2, 2, 2);
+      saturnOrbit.add(saturnMesh);
+      planets.push(saturnMesh);
+
+      const ringGeometry = new THREE.RingGeometry(1, 5, 32);
+      const saturnRingMaterial = new THREE.MeshBasicMaterial({ color: "grey", side: THREE.DoubleSide });
+      const ringMesh = new THREE.Mesh(ringGeometry, saturnRingMaterial);
+      saturnOrbit.add(ringMesh);
+      planets.push(ringMesh);
+
+      {
+        const color = 0xffffff;
+        const intensity = 3;
+        const light = new THREE.PointLight(color, intensity);
+
+        scene.add(light);
+      }
+      {
+        const color = 0xffffff;
+        const intensity = 1;
+        const light = new THREE.DirectionalLight(color, intensity);
+        light.position.set(-1, 2, 4);
+
+        scene.add(light);
+      }
+
+      class AxisGridHelper {
+        constructor(node, units = 10) {
+          const axes = new THREE.AxesHelper();
+          axes.material.depthTest = false;
+          axes.renderOrder = 2;
+          node.add(axes);
+
+          const grid = new THREE.GridHelper(units, units);
+          grid.material.depthTest = false;
+          grid.renderOrder = 1;
+          node.add(grid);
+
+          this.grid = grid;
+          this.axes = axes;
+          this.visible = false;
+        }
+        get visible() {
+          return this._visible;
+        }
+        set visible(vis) {
+          this._visible = vis;
+          this.grid.visible = vis;
+          this.axes.visible = vis;
+        }
+      }
+
+      const gui = new dat.GUI();
+
+      const makeAxisGrid = (node, label, units) => {
+        const helper = new AxisGridHelper(node, units);
+        gui.add(helper, "visible").name(label);
+      };
+      makeAxisGrid(solarSystem, "solarSystem", 25);
+      makeAxisGrid(sunMesh, "sunMesh");
+      makeAxisGrid(earthOrbit, "earthOrbit");
+      makeAxisGrid(earthMesh, "earthMesh");
+      makeAxisGrid(moonMesh, "moonMesh");
+      makeAxisGrid(saturnOrbit, "saturnOrbit");
+      makeAxisGrid(saturnMesh, "saturnMesh");
+      makeAxisGrid(ringMesh, "ringMesh");
+
+      const render = time => {
+        time *= 0.001;
+
+        if (resizeRendererToDisplaySize(renderer)) {
+          const canvas = renderer.domElement;
+          camera.aspect = canvas.clientWidth / canvas.clientHeight;
+          camera.updateProjectionMatrix();
+        }
+
+        planets.forEach((obj, idx) => {
+          const speed = 3 + idx * 0.1;
+          const rotation = time / speed;
+
+          obj.rotation.y = rotation;
+          obj.rotation.x = 1;
+        });
+
+        renderer.render(scene, camera);
+
+        requestAnimationFrame(render);
+      };
+
+      requestAnimationFrame(render);
+
+      const resizeRendererToDisplaySize = renderer => {
+        const canvas = renderer.domElement;
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+
+        const needResize = canvas.width !== width || canvas.height !== height;
+        if (needResize) {
+          renderer.setSize(width, height, false);
+        }
+        return needResize;
+      };
+      renderer.render(scene, camera);
+    };
+
+    main();
+  </script>
+</body>
+
+</html>
