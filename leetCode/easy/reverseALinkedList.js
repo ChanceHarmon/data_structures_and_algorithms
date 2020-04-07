@@ -10,7 +10,8 @@
 
 // A linked list can be reversed either iteratively or recursively. Could you implement both?
 
-
+//Big O space: O(1) We reverse the list in place, no extra storage.
+//Big O time: O(n) For both solutions, Itereative uses a single loop and performs all actions in place, the Recursive solution has no loop, but we are using the callstack so it is still N based on how long the list we are given is.
 
 //Iterative
 
