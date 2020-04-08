@@ -41,19 +41,31 @@
 
 
 
-const countElements = arr => {
-  if (arr.length < 2) return 0;
-  const hashMap = new Map();
-  let count = 0;
+// const countElements = arr => {
+//   if (arr.length < 2) return 0;
+//   const hashMap = new Map();
+//   let count = 0;
+//   for (let i = 0; i < arr.length; i++) {
+//     hashMap.set(arr[i], 1);
+//   }
+//   for (let i = 0; i < arr.length; i++) {
+//     if (hashMap.has(arr[i] + 1)) {
+//       count++;
+//     }
+//   }
+//   return count;
+// };
+var countElements = function (arr) {
+  let counter = 0;
   for (let i = 0; i < arr.length; i++) {
-    hashMap.set(arr[i], 1);
-  }
-  for (let i = 0; i < arr.length; i++) {
-    if (hashMap.has(arr[i] + 1)) {
-      count++;
+    for (let j = 1; j < arr.length; j++) {
+      console.log('i', i, 'j', j, 'arr[i]', arr[i], 'arr[j]', arr[j], 'counter', counter)
+      if (arr[i] + 1 === arr[j]) {
+        counter++;
+      }
     }
   }
-  return count;
+  return counter;
 };
 
-console.log(countElements([1, 2, 3]))
+console.log(countElements([1, 1, 2, 2]))
