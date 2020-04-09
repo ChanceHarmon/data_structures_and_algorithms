@@ -159,6 +159,21 @@ const sortPeopleBetter = (arr) => {
   })
 };
 
+//For students that haven't been taught ternary yet
+
+// const sortPeopleBetter = (arr) => {
+//   arr.sort((a, b) => {
+//     if(a.lastName === b.lastName && a.firstName === b.firstName){
+//       return a.age > b.age;
+//     } else if ( a.lastName === b.lastName){
+//       return a.firstName > b.firstName;
+//     } else {
+//       return a.lastName > b.lastName;
+//     }
+//  })
+//    return arr;
+// };
+
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 9 - Stretch Goal
 
