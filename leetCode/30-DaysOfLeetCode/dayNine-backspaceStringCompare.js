@@ -180,3 +180,22 @@ const backspaceCompare = (S, T) => {
   if (S === T) return true;
   else return false;
 }
+
+//One last submission, I got it down to one loop after taking a break for a day, plus day 10 wasa submission I had already made.
+
+const backspaceCompare = (S, T) => {
+  while (S.match(/\S#+|#+/) || T.match(/\S#+|#+/)) {
+    if (S.match(/\S#/)) {
+      S = (S.replace(/\S#/, ''))
+    } else if (S.match(/#/)) {
+      S = (S.replace(/#/, ''))
+    }
+    if (T.match(/\S#/)) {
+      T = (T.replace(/\S#/, ''))
+    } else if (T.match(/#/)) {
+      T = (T.replace(/#/, ''))
+    }
+  }
+  if (S === T) return true;
+  else return false;
+}
