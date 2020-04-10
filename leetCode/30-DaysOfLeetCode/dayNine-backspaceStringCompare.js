@@ -33,6 +33,12 @@
 
 // Can you solve it in O(N) time and O(1) space?
 
+//Big O is going to be explained by progress of methods. I spent way more time than I should have, but I loved this problem.
+
+//Method 1:
+//Big O space: O(n) We use .split() so this makes an array of each string. Even is we use .join(), we still created the space in memory.
+//Big O time: O(n) We use four for loops, yes, breathe. None of them are nested. but I had a hard time getting the index value manipulation to work correctly. Don't worry, it gets better.
+
 const backspaceCompare = (S, T) => {
 
   let string = S.split('');
@@ -74,6 +80,10 @@ const backspaceCompare = (S, T) => {
 
 };
 
+//Method 2:
+//Big O space: O(n) We use .split() so this makes an array of each string. Even is we use .join(), we still created the space in memory.
+//Big O time: O(n) Better than method 1. We were able to reduce the number of loops to two. Same factored time, but still a better refactor.
+
 const backspaceCompare = (S, T) => {
   let string = S.split('')
   let string2 = T.split('');
@@ -105,6 +115,9 @@ const backspaceCompare = (S, T) => {
     return false;
   }
 }
+//Method 3:
+//Big O space: O(1) Now we are using regex to search the string and manipulate the given string, with out using array methods.
+//Big O time: O(n) Again using four loops, while loops made more sense this time. I had a hard time getting the condition of sliding the characters to the next evaluation without checking again after the change for the same condition, until all forms of that single condition were met.
 
 const backspaceCompare = (S, T) => {
   while (S.match(/\S#/) && S.length > 0) {
@@ -118,6 +131,51 @@ const backspaceCompare = (S, T) => {
   }
   while (T.match(/#/) && T.length >= 0) {
     T = T.replace(/#/, '')
+  }
+  if (S === T) return true;
+  else return false;
+}
+
+//Method 4:
+//Big O space: O(1) Now we are using regex to search the string and manipulate the given string, with out using array methods.
+//Big O time: O(n) Now we have it down to two while loops Still linear time, but better to be 2n than 4n.
+
+const backspaceCompare = (S, T) => {
+  while (S.match(/\S#+|#+/) && S.length >= 0) {
+    if (S.match(/\S#/)) {
+      S = (S.replace(/\S#/, ''))
+    } else if (S.match(/#/)) {
+      S = (S.replace(/#/, ''))
+    }
+  }
+  while (T.match(/\S#+|#+/) && T.length >= 0) {
+    if (T.match(/\S#/)) {
+      T = (T.replace(/\S#/, ''))
+    } else if (T.match(/#/)) {
+      T = (T.replace(/#/, ''))
+    }
+  }
+  if (S === T) return true;
+  else return false;
+}
+
+//Method 5:
+//Nothing different than Method 4, just realized I didn't need the additional comparison condition in the while loops.
+
+const backspaceCompare = (S, T) => {
+  while (S.match(/\S#+|#+/)) {
+    if (S.match(/\S#/)) {
+      S = (S.replace(/\S#/, ''))
+    } else if (S.match(/#/)) {
+      S = (S.replace(/#/, ''))
+    }
+  }
+  while (T.match(/\S#+|#+/)) {
+    if (T.match(/\S#/)) {
+      T = (T.replace(/\S#/, ''))
+    } else if (T.match(/#/)) {
+      T = (T.replace(/#/, ''))
+    }
   }
   if (S === T) return true;
   else return false;
