@@ -75,10 +75,8 @@ const backspaceCompare = (S, T) => {
 };
 
 const backspaceCompare = (S, T) => {
-
   let string = S.split('')
   let string2 = T.split('');
-
   for (let i = 0; i < string.length; i++) {
     if (string[i] === '#' && i > 0) {
       string.splice([i - 1], 2)
@@ -89,7 +87,6 @@ const backspaceCompare = (S, T) => {
       i--;
     }
   }
-
   for (let i = 0; i < string2.length; i++) {
     if (string2[i] === '#' && i > 0) {
       string2.splice([i - 1], 2)
@@ -100,14 +97,28 @@ const backspaceCompare = (S, T) => {
       i--;
     }
   }
-
   let filteredStringOne = string.join('');
   let filteredStringTwo = string2.join('');
-
   if (filteredStringOne === filteredStringTwo) {
     return true
   } else {
     return false;
   }
+}
 
+const backspaceCompare = (S, T) => {
+  while (S.match(/\S#/) && S.length > 0) {
+    S = S.replace(/\S#/, '')
+  }
+  while (S.match(/#/) && S.length >= 0) {
+    S = S.replace(/#/, '')
+  }
+  while (T.match(/\S#/) && T.length > 0) {
+    T = T.replace(/\S#/, '')
+  }
+  while (T.match(/#/) && T.length >= 0) {
+    T = T.replace(/#/, '')
+  }
+  if (S === T) return true;
+  else return false;
 }
