@@ -28,7 +28,7 @@
 // 1 <= stones.length <= 30
 // 1 <= stones[i] <= 1000
 
-//Big O space: O(1) We directlet compare the array given, no extra storage used.
+//Big O space: O(1) We directly compare the array given, no extra storage used.
 //Big O time: O(n^2) we use .sort inside of the for loop, so we have a nested loop before we ever do our comparison.
 
 const lastStoneWeight = stones => {
