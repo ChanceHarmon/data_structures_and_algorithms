@@ -13,6 +13,10 @@
 // Explanation: [0, 1] (or [1, 0]) is a longest contiguous subarray with equal number of 0 and 1.
 // Note: The length of the given binary array will not exceed 50,000.
 
+
+//Big O space: O(n) We use a hash map to store count and index of count.
+//Big O time: O(n) One single loop to update count and check hashmap for values to see if it is a contiguous run.
+
 const findMaxLength = nums => {
 
   let result = 0;
