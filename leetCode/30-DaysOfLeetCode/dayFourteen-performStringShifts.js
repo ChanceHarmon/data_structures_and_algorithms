@@ -1,5 +1,7 @@
 'use strict';
 
+//As of 4/14/20, this is another challenge specific to the 30 Days of Leetcode Challenge. I will try to remember to check when the contest is finished to see if it becomes public.
+
 
 // Perform String Shifts
 // You are given a string s containing lowercase English letters, and a matrix shift, where shift[i] = [direction, amount]:
@@ -46,6 +48,9 @@
 
 //Right 1 = remove from end and place at the beginning, Left 0 = remove from the beginning and add to the end.
 
+//Big O space: O(n) We split and join creating  temp arrays, I will learn how to get around this one day.
+//Big O time: O(n^2) While only using one for loop, we have a nested reduce call in each pass of the for loop. Could be improved, I am just burnt for the day on this one.
+
 //This is the first version, it took forever to get here. I basically started from scratch 3 times to just to get here. The edge case handling gets really weird if you don't perform the changes iteratively. 
 
 // const stringShift = (s, shift) => {
@@ -83,7 +88,7 @@
 //   return cut
 // };
 
-
+//This is better, cleaner and removes the unnessecary reference to th s variable twice, we can just manipulate the string directly for each shift index
 const stringShift = (s, shift) => {
 
   for (let i = 0; i < shift.length; i++) {
