@@ -89,25 +89,53 @@
 // };
 
 //This is better, cleaner and removes the unnessecary reference to th s variable twice, we can just manipulate the string directly for each shift index
-const stringShift = (s, shift) => {
 
+
+// const stringShift = (s, shift) => {
+
+//   for (let i = 0; i < shift.length; i++) {
+//     let string = s.split('')
+//     if (shift[i][0] === 0) {
+//       s = string.splice(0, shift[i][1])
+//       string.push(s)
+//       string = string.reduce((total, amount) => total.concat(amount), []
+//       );
+//       s = string.join('');
+//     }
+//     else if (shift[i][0] === 1) {
+//       s = string.splice(-shift[i][1])
+//       string.unshift(s)
+//       string = string.reduce((total, amount) => total.concat(amount), []
+//       );
+//       s = string.join('');
+//     }
+//   }
+//   return s
+// };
+
+
+
+const stringShift = (s, shift) => {
   for (let i = 0; i < shift.length; i++) {
-    let string = s.split('')
+    let stringOne = '';
+    let stringTwo = '';
     if (shift[i][0] === 0) {
-      s = string.splice(0, shift[i][1])
-      string.push(s)
-      string = string.reduce((total, amount) => total.concat(amount), []
-      );
-      s = string.join('');
+      if (shift[i][1] === 0) stringOne = '';
+      else {
+        stringOne = s.slice(0, shift[i][1]);
+      }
+      stringTwo = s.slice(shift[i][1], s.length);
+      s = stringTwo.concat(stringOne, '')
     }
     else if (shift[i][0] === 1) {
-      s = string.splice(-shift[i][1])
-      string.unshift(s)
-      string = string.reduce((total, amount) => total.concat(amount), []
-      );
-      s = string.join('');
+      if (shift[i][1] === 0) stringOne = '';
+      else {
+        stringOne = s.slice(-shift[i][1]);
+      }
+      stringTwo = s.slice(0, s.length - shift[i][1]);
+      s = stringOne.concat(stringTwo, '')
     }
   }
   return s
-};
+}
 console.log(stringShift('xqgwkiqpif', [[1, 4], [0, 7], [0, 8], [0, 7], [0, 6], [1, 3], [0, 1], [1, 7], [0, 5], [0, 6]]))
