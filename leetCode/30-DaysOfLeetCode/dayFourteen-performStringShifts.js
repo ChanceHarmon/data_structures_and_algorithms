@@ -80,9 +80,9 @@
 //       );
 //       console.log('else string after reduce', string)
 //       cut = string.join('');
-//       console.log('else if final cut', cut)
+//       
 //     }
-//     //console.log(string)
+//     
 //     //cut = string.join('')
 //   }
 //   return cut
