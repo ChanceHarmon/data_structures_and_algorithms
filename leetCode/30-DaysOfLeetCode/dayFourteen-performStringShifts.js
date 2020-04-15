@@ -113,7 +113,8 @@
 //   return s
 // };
 
-
+//Big O changes: So I am waiting for an experts opinion on space, but hopefully we got it down to O(1) fingers crossed.
+//Big O time: O(n) we got rid of the need to have array methods completely, changing the string directly as we loop. Boom!
 
 const stringShift = (s, shift) => {
   for (let i = 0; i < shift.length; i++) {
