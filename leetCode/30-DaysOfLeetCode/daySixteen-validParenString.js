@@ -20,6 +20,10 @@
 // Note:
 // The string size will be in the range[1, 100].
 
+//Big O space: O(n) We use two stacks to be able to track the open parens and the stars.
+//Big O time: O(n) We use a for loop and a while loop, but not nested.
+
+
 const checkValidString = s => {
 
   let stackOpen = [];
