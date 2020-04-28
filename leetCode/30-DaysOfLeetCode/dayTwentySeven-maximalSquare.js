@@ -14,6 +14,11 @@
 
 // Output: 4
 
+//Big O space: O(n) We use memoization and the callstack for memory, but we reduce the callstack using memo, so I believe it breaks down to linear time.
+//Big O time: O(n^2) Two sets of nested loops, one to build memo structure, and one to check grid vs memo data.
+
+//I learned a lot researching this problem about memoization. I had rarely heard it, and never had it explained. Very cool technique, and it was a good refresher of recursion. I don't technically use a recursive call for this solution, but I could if I put the first nested for loop into it's own function. Just depends on taste of code style. 
+
 const maximalSquare = matrix => {
   if (matrix.length < 1) return 0;
   let memo = [];
