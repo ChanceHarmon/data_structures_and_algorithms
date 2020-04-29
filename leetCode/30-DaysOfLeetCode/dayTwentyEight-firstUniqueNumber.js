@@ -1,7 +1,7 @@
 'use strict';
 
 
-//Not done yet, passes 16/17 test cases. Stuck on that last one that I really can't even see my out put for.
+//So far in my research this is not a public posted questions, and there doesn't appear to be any kind of JavaScript solution anywhere. The question is only referenced as a Bloomberg question a few years ago, and mentions of it for Amazon, but not junior dev level. Happy to have solved this one, was quite the battle.
 
 //Update: solved before deadline, still 100%.  Super crap way, need to explore it quite abit more to understand how the hack works for every case
 
@@ -84,7 +84,11 @@
 // Hint #3  
 // Use set or heap to make running time of each function O(logn).
 
+//I used Hint 1 as a solution.
+//Naturally, JavaScript doesn't have a supported Single or Double Linked List class, so you have to build that as well. I could probably cut a few features out of this one, but I didn't want to start messing with that after a 10 hour battle with thsi question.
 
+//Big O space: O(n) We use a hashmap to control our unique sequence, and improve our time by being able to have direct look up in the map, instead of having to loop through the linked list to find it and remove it if it is no longer unique.
+//Big O time: O(logN) worst case this could still be O(n), but by cutting our search time down significantly using a map to store values. After seeing a number twice, we never even bother looking for it against our list, and there are no other operations performed once it is marked as null and removed from the list.
 
 class Node {
   constructor(val) {
