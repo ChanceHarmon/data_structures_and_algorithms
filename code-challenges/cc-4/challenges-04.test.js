@@ -25,13 +25,17 @@ Write a function named isCapitalized that takes in a string. This function shoul
 Return an array containing all the matches.
 ------------------------------------------------------------------------------------------------ */
 
+//Old test cases
 // const isCapitalized = (str) => {
-//   const arr = str.match(/([A-Z][a-z]*)/g);
+//   let arr = str.match(/([A-Z][a-z]*)/g);
 //   return arr;
 // };
+
+//New test cases may 2020
 const isCapitalized = str => {
   let regex = /[A-Z][a-zA-Z]*/g;
-  return str.match(regex);
+  let capitals = str.match(regex);
+  return capitals || [];
 }
 
 /* ------------------------------------------------------------------------------------------------
