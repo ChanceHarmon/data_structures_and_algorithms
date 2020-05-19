@@ -1,7 +1,37 @@
 'use strict';
 
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 1
+CHALLENGE 1 - Review
+
+Complete the createServer function to include routes
+a GET request to / should respond with status of 200
+a DELETE request to /things/1 should respond with status of 405
+any other route should return status of 404
+------------------------------------------------------------------------------------------------ */
+const createServer = () => {
+  const express = require('express');
+  const app = express();
+
+  // routes go here
+  app.get('/', (request, response) => {
+    response.status(200).send();
+  })
+  app.delete('/things/1', (request, response) => {
+    response.status(405).send();
+  })
+  app.get('*', (request, response) => {
+    response.status(404).send();
+  })
+
+  var server = app.listen(3000, function () {
+    var port = server.address().port;
+    console.log('Example app listening at port', port);
+  });
+  return server;
+};
+
+/* ------------------------------------------------------------------------------------------------
+CHALLENGE 2
 
 Write a function named toTitleCase that takes in an array of strings and returns an array of strings with the first character in upper case and the rest as is.
 
@@ -9,7 +39,6 @@ For example, ['apple', 'banana', 'MacGyver'] returns ['Apple', 'Banana', 'MacGyv
 ------------------------------------------------------------------------------------------------ */
 
 const toTitleCase = (arr) => {
-
   let newArray = [];
   arr.forEach(function (v) {
     newArray.push(v.replace(v[0], v.charAt(0).toUpperCase()));
@@ -18,7 +47,7 @@ const toTitleCase = (arr) => {
 };
 
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 2
+CHALLENGE 3
 
 Write a function named biggerThanLuke that, given the Star Wars data, below, returns the names of the characters whose mass is greater than Luke's.
 
@@ -92,8 +121,23 @@ let biggerThanLuke = (arr) => {
   return arr.filter(big => parseInt(big.height) > 172).map(big => big.name).join().replace(',', ' - ');
 };
 
+// let biggerThanLuke = (arr) => {
+//   const luke = arr.find(character => character.name === 'Luke Skywalker');
+//   return arr
+//     .filter(character => parseInt(character.mass) > parseInt(luke.mass))
+//     .reduce((str, character, i, arr) => {
+//       let delimiter = '';
+//       if (i === arr.length - 1) {
+//         delimiter = ' - ';
+//       }
+//       str += delimiter + character.name;
+
+//       return str;
+//     }, '');
+// };
+
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 3
+CHALLENGE 4
 Write a function named sortBy that takes in an array of objects, each of which has a particular property, and sorts those objects by that property, lowest to highest, returning the same array.
 
 Here is an example of the input:
@@ -115,7 +159,7 @@ const sortBy = (property, arr) => arr.sort((a, b) => {
 });
 
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 4
+CHALLENGE 5 - Stretch Goal
 
 Write a function that determines if a given URL is secure, beginning with https://
 
@@ -128,8 +172,12 @@ https:/missingslash.org returns false because the URL is malformed
 ------------------------------------------------------------------------------------------------ */
 const isSecure = (url) => url.slice(0, 8) === 'https://' ? true : false;
 
+// const isSecure = (url) => {
+//   return /^https:\/\//.test(url);
+// };
+
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 5 - Stretch Goal
+CHALLENGE 6 - Stretch Goal
 
 Write a function named detectTicTacToeWin that accepts a two-dimensional array of strings. Each string is guaranteed to be either "X", "O" or an empty string. Your function should check to see if any row, column, or either diagonal direction has three matching "X" or "O" symbols (non-empty strings), three-in-a-line.
 
@@ -180,7 +228,40 @@ Run your tests from the console: jest challenge-14.test.js
 
 ------------------------------------------------------------------------------------------------ */
 
-describe('Testing challenge 1', () => {
+describe('Testing challenge 1', function () {
+
+  const request = require('supertest');
+
+  let server;
+
+  beforeEach(function () {
+    server = createServer();
+  });
+
+  afterEach(function () {
+    server.close();
+  });
+
+  test('responds to /', function testSlash(done) {
+    request(server)
+      .get('/')
+      .expect(200, done);
+  });
+
+  test('responds to /things/1', function testSlash(done) {
+    request(server)
+      .delete('/things/1')
+      .expect(405, done);
+  });
+
+  test('404 everything else', function testPath(done) {
+    request(server)
+      .get('/foo/bar')
+      .expect(404, done);
+  });
+});
+
+describe('Testing challenge 2', () => {
   test('It should convert each word to title case', () => {
     const words = ['apple', 'banana', 'MacGyver'];
     expect(toTitleCase(words)).toStrictEqual(['Apple', 'Banana', 'MacGyver']);
@@ -189,14 +270,14 @@ describe('Testing challenge 1', () => {
   });
 });
 
-describe('Testing challenge 2', () => {
+describe('Testing challenge 3', () => {
   test('It should return only characters that are bigger than Luke', () => {
     expect(biggerThanLuke(starWarsData)).toStrictEqual('Darth Vader - Pex Kylar');
     expect(biggerThanLuke([])).toStrictEqual('');
   });
 });
 
-describe('Testing challenge 3', () => {
+describe('Testing challenge 4', () => {
   test('It should sort items by a price', () => {
 
     expect(sortBy('price', [
@@ -225,7 +306,7 @@ describe('Testing challenge 3', () => {
   });
 });
 
-describe('Testing challenge 4', () => {
+describe('Testing challenge 5', () => {
   test('It should check if url is https', () => {
 
     expect(isSecure('http://www.insecure.com')).toBe(false);
@@ -234,7 +315,7 @@ describe('Testing challenge 4', () => {
   });
 });
 
-describe('Testing challenge 5', () => {
+describe('Testing challenge 6', () => {
   test('It should return true if there are three in a row', () => {
     expect(detectTicTacToeWin([['X', '', 'O'], ['X', 'O', ''], ['X', 'O', 'X']])).toStrictEqual(true);
     expect(detectTicTacToeWin([['O', '', 'X'], ['X', 'O', 'X'], ['X', '', 'O']])).toStrictEqual(true);

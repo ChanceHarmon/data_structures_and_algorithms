@@ -1,7 +1,20 @@
 'use strict';
 
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 1
+CHALLENGE 1 - Review
+
+Write a function that iterates over an array of people objects 
+and creates a new list of each person's full name using the array method 'map'.
+Each object will have the shape {firstName:string, lastName:string}
+E.g. [ { firstName:"Jane", lastName:"Doe" }, { firstName:"Donald", lastName:"Duck"}]
+should convert to ["Jane Doe", "Donald Duck"]
+Note the space in between first and last names.
+------------------------------------------------------------------------------------------------ */
+const toLastNames = people => people.map(person => `${person.firstName} ${person.lastName}`);
+
+
+/* ------------------------------------------------------------------------------------------------
+CHALLENGE 2
 
 Write a function named validatePin that uses a regular expression pattern to validate a PIN.
 
@@ -13,11 +26,15 @@ const validatePin = (pin) => {
     let nip = pin.toString();
     if (nip.match(/^\d{4}$/)) { return true; } else { return false; };
   }
-
 };
 
+// const validatePin = (pin) => {
+//   const pinPattern = /^\d{4}$/g;
+//   return pinPattern.test(pin);
+// };
+
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 2
+CHALLENGE 3
 
 Write a function named validateEmail that takes in an email address and validates it based
 on several rules:
@@ -34,8 +51,13 @@ Note: if you ever need to validate an email using a regex in practice, the Inter
 
 const validateEmail = (email) => /^\w+[\w||.]\w+@\w*.[nco][eor][tmg]$/.test(email);
 
+// const validateEmail = (email) => {
+//   const emailPattern = /^[A-Za-z0-9]+\.?[A-Za-z0-9]+?@[A-Za-z0-9]+.(net|com|org)$/;
+//   return emailPattern.test(email);
+// };
+
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 3
+CHALLENGE 4
 
 Write a function named validatePhoneNumber that accepts a phone number and determines if it is valid.
 
@@ -57,9 +79,8 @@ Return either true or false.
 
 const validatePhoneNumber = (phoneNumber) => /^([(][\d]{3}[)]|[\d]{3})[ -]?\d{3}[- ]?\d{4}$/.test(phoneNumber);
 
-
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 4 - Stretch Goal
+CHALLENGE 5 - Stretch Goal
 
 Write a function named findTagNames that iterates over an array of HTML strings and uses a regular expression pattern to return the closing tags.
 
@@ -81,6 +102,12 @@ const findTagNames = elements => {
   //both returns are the same, but repl doesn't  like .flat();
 };
 
+
+// const findTagNames = elements => {
+//   return elements.map(str => str.match(/<(\/[a-z]+\d?)>/g))
+//     .reduce((ans, result) => ans.concat(result.map(x => x.slice(1, (x.length - 1)))), []);
+// };
+
 /* ------------------------------------------------------------------------------------------------
 TESTS
 
@@ -92,6 +119,16 @@ Run your tests from the console: jest solutions-11.test.js
 ------------------------------------------------------------------------------------------------ */
 
 describe('Testing challenge 1', () => {
+  test('It should convert object to full name string', () => {
+
+    const people = [{ firstName: "Jane", lastName: "Doe" }, { firstName: "James", lastName: "Bond" }];
+
+    expect(toLastNames(people)).toStrictEqual(["Jane Doe", "James Bond"]);
+
+  });
+});
+
+describe('Testing challenge 2', () => {
   test('It should validate a PIN of exactly four digits', () => {
     expect(validatePin(1234)).toBeTruthy();
     expect(validatePin(123)).toBeFalsy();
@@ -104,7 +141,7 @@ describe('Testing challenge 1', () => {
   });
 });
 
-describe('Testing challenge 2', () => {
+describe('Testing challenge 3', () => {
   test('It should match a basic email', () => {
     expect(validateEmail('joe@codefellows.com')).toBeTruthy();
   });
@@ -134,7 +171,7 @@ describe('Testing challenge 2', () => {
   });
 });
 
-describe('Testing challenge 3', () => {
+describe('Testing challenge 4', () => {
   test('It should match the acceptable phone number formats', () => {
     expect(validatePhoneNumber('(555) 555-5555')).toBeTruthy();
     expect(validatePhoneNumber('555 555-5555')).toBeTruthy();
@@ -158,7 +195,7 @@ describe('Testing challenge 3', () => {
   });
 });
 
-describe('Testing challenge 4', () => {
+describe('Testing challenge 5', () => {
   test('It should return the closing tags', () => {
     expect(findTagNames(['<h1>Hello, world!</h1>', '<p>Welcome to my site</p>'])).toStrictEqual(['/h1', '/p']);
   });

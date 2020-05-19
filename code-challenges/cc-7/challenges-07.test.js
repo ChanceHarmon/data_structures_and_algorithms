@@ -1,9 +1,31 @@
 'use strict';
 
-// import { tsArrayType } from "@babel/types";
+// to learn more about the cheerio library and what it is doing, look at their documentation: https://www.npmjs.com/package/cheerio
+const cheerio = require('cheerio');
 
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 1
+CHALLENGE 1 - Review
+
+Write a function named addTea that uses jQuery to add tea to the shopping list.
+------------------------------------------------------------------------------------------------ */
+
+let $ = createSnippetWithJQuery(`
+  <ul>
+    <li>apples</li>
+    <li>bananas</li>
+    <li>carrots</li>
+    <li>beans</li>
+    <li>coffee</li>
+  </ul>
+`);
+
+const addTea = () => {
+  const $li = $(`<li>tea</li>`);
+  $('ul').append($li);
+}
+
+/* ------------------------------------------------------------------------------------------------
+CHALLENGE 2
 
 Write a function named forLoopTwoToThe that, given an array of integers as input, iterates over the array and returns a new array. The returned array should contain the result of raising 2 to the power of the original input element.
 
@@ -19,8 +41,9 @@ const forLoopTwoToThe = (arr) => {
   }
   return newArr;
 };
+
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 2
+CHALLENGE 3
 
 Write a function named forEachTwoToThe that produces the same output as your forLoopTwoToThe function from challenge 1, but uses forEach instead of a for loop.
 ------------------------------------------------------------------------------------------------ */
@@ -33,9 +56,8 @@ const forEachTwoToThe = (arr) => {
   return newArr
 };
 
-
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 3
+CHALLENGE 4
 
 Write a function named mapTwoToThe that produces the same output as your forLoopTwoToThe function from challenge 1 and your forEachTwoToThe function from challenge 2, but uses map instead of a for loop or forEach.
 ------------------------------------------------------------------------------------------------ */
@@ -46,7 +68,7 @@ const mapTwoToThe = (arr) => {
 };
 
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 4
+CHALLENGE 5 - Stretch Goal
 
 Write a function named charCode that, given an array of letters as an input, uses map to return a new array where each element is the result of the `charCodeAt` method on the original array element.
 
@@ -61,7 +83,7 @@ const charCode = (arr) => {
 };
 
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 5
+CHALLENGE 6 - Stretch Goal
 
 Write a function that, given an array of numbers as input, uses map to return a new array where each element is either the string "even" or the string "odd", based on each value.
 
@@ -87,7 +109,7 @@ const evenOdd = (arr) => {
 };
 
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 6
+CHALLENGE 7 - Stretch Goal
 
 Use the snorlaxAbilities data, below, for this challenge.
 
@@ -131,7 +153,7 @@ const snorlaxAbilities = {
 const extractAbilities = (arr) => arr.map((value) => value.ability.name);
 
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 7
+CHALLENGE 8 - Stretch Goal
 
 Use the snorlaxStats data, below, for this challenge.
 
@@ -174,7 +196,6 @@ const snorlaxStats = {
 };
 
 const extractStats = (arr) => {
-
   let stats = arr.map(function (obj) {
     return {
       name: obj.stat.name,
@@ -183,7 +204,6 @@ const extractStats = (arr) => {
   });
   return stats;
 };
-
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
@@ -197,6 +217,13 @@ Run your tests from the console: jest challenges-07.test.js
 ------------------------------------------------------------------------------------------------ */
 
 describe('Testing challenge 1', () => {
+  test('It should add tea to the list', () => {
+    addTea();
+    expect($('li:nth-child(6)').text()).toStrictEqual('tea');
+  })
+});
+
+describe('Testing challenge 2', () => {
   test('It should return two raised to the power of the integer', () => {
     expect(forLoopTwoToThe([0, 4, 5])).toStrictEqual([1, 16, 32]);
     expect(forLoopTwoToThe([0, 4, 5]).length).toStrictEqual(3);
@@ -207,7 +234,7 @@ describe('Testing challenge 1', () => {
   });
 });
 
-describe('Testing challenge 2', () => {
+describe('Testing challenge 3', () => {
   test('It should return two raised to the power of the integer', () => {
     expect(forEachTwoToThe([0, 4, 5])).toStrictEqual([1, 16, 32]);
     expect(forEachTwoToThe([0, 4, 5]).length).toStrictEqual(3);
@@ -218,7 +245,7 @@ describe('Testing challenge 2', () => {
   });
 });
 
-describe('Testing challenge 3', () => {
+describe('Testing challenge 4', () => {
   test('It should return two raised to the power of the integer', () => {
     expect(mapTwoToThe([0, 4, 5])).toStrictEqual([1, 16, 32]);
     expect(mapTwoToThe([0, 4, 5]).length).toStrictEqual(3);
@@ -229,14 +256,14 @@ describe('Testing challenge 3', () => {
   });
 });
 
-describe('Testing challenge 4', () => {
+describe('Testing challenge 5', () => {
   test('It should return an array containing the character code for each letter', () => {
     expect(charCode(['C', 'o', 'd', 'e', '3', '0', '1'])).toStrictEqual([67, 111, 100, 101, 51, 48, 49]);
     expect(charCode(['C', 'o', 'd', 'e', '3', '0', '1']).length).toStrictEqual(7);
   });
 });
 
-describe('Testing challenge 5', () => {
+describe('Testing challenge 6', () => {
   test('It should return an array containing the keys from an object', () => {
     expect(evenOdd([5, 8, 2, 6, 9, 13, 542, 541])).toStrictEqual(['odd', 'even', 'even', 'even', 'odd', 'odd', 'even', 'odd']);
     expect(evenOdd([5, 8, 2, 6, 9, 13, 542, 541]).length).toStrictEqual(8);
@@ -258,14 +285,14 @@ describe('Testing challenge 5', () => {
   });
 });
 
-describe('Testing challenge 6', () => {
+describe('Testing challenge 7', () => {
   test('It should return an array containing only the ability names', () => {
     expect(extractAbilities(snorlaxAbilities.abilities)).toStrictEqual(['gluttony', 'cute charm', 'immunity']);
     expect(extractAbilities(snorlaxAbilities.abilities).length).toStrictEqual(3);
   });
 });
 
-describe('Testing challenge 7', () => {
+describe('Testing challenge 8', () => {
   test('It should return an array containing objects with name and total values', () => {
     expect(extractStats(snorlaxStats.stats)).toStrictEqual([
       { name: 'speed', total: 35, },
@@ -275,3 +302,7 @@ describe('Testing challenge 7', () => {
     expect(extractStats(snorlaxStats.stats).length).toStrictEqual(3);
   });
 });
+
+function createSnippetWithJQuery(html) {
+  return cheerio.load(html);
+};
