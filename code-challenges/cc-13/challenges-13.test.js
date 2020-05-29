@@ -19,9 +19,8 @@ const $ = createSnippetWithJQuery(`
 `);
 
 const fixTheTypo = () => {
-  //<solution>
   $('.pear').text('Pear');
-  //</solution>
+
 };
 
 /* ------------------------------------------------------------------------------------------------

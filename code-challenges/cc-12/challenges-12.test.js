@@ -57,6 +57,21 @@ const grandTotal = (stores) => {
   return (hourlytotals);
 };
 
+// const grandTotal = (stores) => {
+
+//   const hourlySales = [];
+
+//   for (let i = 0; i < stores[0].length; i++) {
+//     let hourlyTotal = 0;
+//     for (let j = 0; j < stores.length; j++) {
+//       hourlyTotal += stores[j][i];
+//     }
+//     hourlySales.push(hourlyTotal);
+//   }
+
+//   return hourlySales;
+// };
+
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
 
