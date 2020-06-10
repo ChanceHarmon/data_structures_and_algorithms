@@ -40,11 +40,37 @@
  * };
  */
 
+//I did a lot of research on this problem. I intially started with the idea of pushing mini arrays into a return array. This works fine for some cases, but when it starts to reference random that doesn't have a null value, it gets strange in the access of the random node. The solution is more referencing the index of where random points. That was the part I was missing. So after watching a few videos on how this solution works, I am happy just to understand it.
 
 const copyRandomList = head => {
+  let nodeMap = new Map();
+  let newHead = new Node(null, null, null);
+  let pre = newHead;
 
-  if (!head) return null;
-
-
-
+  /** First pass:
+   * 1. copy the node
+   * 2. set the next pointer as original node list
+   * 3. set the random pointer as original node list
+   * 4. create a hashmap between the new and old nodes
+   */
+  while (head) {
+    let newNode = new Node(head.val, null, head.random); // #1 & #3
+    pre.next = newNode; // #2
+    pre = newNode;
+    nodeMap.set(head, newNode); // #4
+    head = head.next;
+  }
+  /** Second pass:
+   * 1. find the old random node thorugh random pointer
+   * 2. get the new random node through the hashmap
+   * 3. update the pointer
+   */
+  let start = newHead.next;
+  while (start) {
+    let oldRandom = start.random; // #1
+    let newRandom = nodeMap.get(oldRandom); // #2
+    start.random = newRandom; // #3
+    start = start.next;
+  }
+  return newHead.next;
 };
