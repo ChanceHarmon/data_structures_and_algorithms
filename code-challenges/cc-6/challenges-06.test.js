@@ -97,7 +97,6 @@ const templatingWithMustache = () => {
       'children': character.children,
       'house': character.house
     });
-    console.log(markup)
     return markup;
   });
 }
