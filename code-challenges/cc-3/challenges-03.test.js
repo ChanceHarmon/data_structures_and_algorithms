@@ -41,7 +41,8 @@ const sortByLength = (arr) => {
   });
   return arr
 };
-
+//const sortByLength = arr => arr.sort((a, b) => a.length - b.length);
+//not working ^^^
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
 
