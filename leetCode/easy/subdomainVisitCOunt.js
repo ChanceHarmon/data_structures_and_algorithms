@@ -42,30 +42,41 @@
 
 const subdomainVisits = cpdomains => {
   let hash = new Map();
-  //first key console.log('key', cpdomains[0].split(' ')[1])
   for (let i = 0; i < cpdomains.length; i++) {
     let count = parseInt(cpdomains[i].split('.')[0].split(' ')[0])
     let firstKey = cpdomains[i].split(' ')[1]
-    //console.log('first key', firstKey.split('.'))
-
-    if (hash.has(firstKey)) {
-      hash.set(firstKey, hash.get(firstKey) + 1)
-      console.log('hash', firstKey, 'value?', hash.get(firstKey))
-      //I get it now, nee to compare and set everything as i go...
-    } else {
+    if (hash.has(firstKey) && firstKey.split('.').length === 3) {
+      hash.set(firstKey, hash.get(firstKey) + count)
+      hash.set(firstKey.split('.')[2], hash.get(firstKey.split('.')[2]) + count)
+      hash.set(`${firstKey.split('.')[1]}.${firstKey.split('.')[2]}`, hash.get(`${firstKey.split('.')[1]}.${firstKey.split('.')[2]}`) + count)
+    } else if (!hash.has(firstKey) && firstKey.split('.').length === 3) {
       hash.set(firstKey, count)
+      if (hash.has(firstKey.split('.')[2])) {
+        hash.set(firstKey.split('.')[2], hash.get(firstKey.split('.')[2]) + count)
+      } else {
+        hash.set(firstKey.split('.')[2], count)
+      }
+      if (hash.has(`${firstKey.split('.')[1]}.${firstKey.split('.')[2]}`)) {
+        hash.set(`${firstKey.split('.')[1]}.${firstKey.split('.')[2]}`, hash.get(`${firstKey.split('.')[1]}.${firstKey.split('.')[2]}`) + count)
+      } else {
+        hash.set(`${firstKey.split('.')[1]}.${firstKey.split('.')[2]}`, count)
+      }
     }
-    if (firstKey.split('.').length === 3) {
-      console.log('test 3', 'hash', hash)
-      hash.set(firstKey.split('.')[2], count)
-      hash.set(`${firstKey.split('.')[1]}.${firstKey.split('.')[2]}`, count)
+    else if (hash.has(firstKey) && firstKey.split('.').length === 2) {
+      hash.set(firstKey, hash.get(firstKey) + count)
+      hash.set(`${firstKey.split('.')[1]}`, hash.get(`${firstKey.split('.')[1]}`) + count)
+    } else if (!hash.has(firstKey) && firstKey.split('.').length === 2) {
+      hash.set(firstKey, count)
+      if (hash.has(`${firstKey.split('.')[1]}`)) {
+        hash.set(`${firstKey.split('.')[1]}`, hash.get(`${firstKey.split('.')[1]}`) + count)
+      } else {
+        hash.set(`${firstKey.split('.')[1]}`, count)
+      }
     }
-    if (firstKey.split('.').length === 2) {
-      console.log('test 2')
-      hash.set(firstKey.split('.')[1], count)
-    }
-    console.log(hash)
   }
-  // this how to find the count console.log(typeof parseInt(cpdomains[0].split('.')[0].split(' ')[0]))
+  let final = [...hash.entries()].map(result => {
+    return `${result[1]} ${result[0]}`
+  })
+  return final
 };
 console.log(subdomainVisits(["900 google.mail.com", "900 google.mail.com", "50 yahoo.com", "1 intel.mail.com", "5 wiki.org"]))
