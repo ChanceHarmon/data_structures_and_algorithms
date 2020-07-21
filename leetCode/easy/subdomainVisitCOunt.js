@@ -1,5 +1,7 @@
 'use strict';
 
+const { parse } = require("mustache");
+
 // Subdomain Visit Count
 
 // A website domain like "discuss.leetcode.com" consists of various subdomains. At the top level, we have "com", at the next level, we have "leetcode.com", and at the lowest level, "discuss.leetcode.com". When we visit a domain like "discuss.leetcode.com", we will also visit the parent domains "leetcode.com" and "com" implicitly.
@@ -33,7 +35,7 @@
 // The answer output can be returned in any order.
 
 
-//General idea: You need a count variable associated with the inputs, and then the break down of each input.  I think a hash map would be most useful. I think for each indez of i, II should save the whole key, iif it doesn't exisit already. then save count to it. then probably break the key into it's sub parts by splitting them on the dots. Then adding a count for those as well. Then for each index of i after, it can update the count of the split keys, and add the entire key with a count as well.
+//General idea: You need a count variable associated with the inputs, and then the break down of each input.  I think a hash map would be most useful. I think for each index of i, II should save the whole key, iif it doesn't exisit already. then save count to it. then probably break the key into it's sub parts by splitting them on the dots. Then adding a count for those as well. Then for each index of i after, it can update the count of the split keys, and add the entire key with a count as well.
 
 // We also probably need a return array to push to. At least for the naive solution.
 
@@ -88,22 +90,29 @@
 const subdomainVisits = cpdomains => {
   let hash = new Map();
   for (let i = 0; i < cpdomains.length; i++) {
-    let count = parseInt(cpdomains[i].split('.')[0].split(' ')[0])
+    let count = parseInt(cpdomains[i].split(' ')[0])
     let firstKey = cpdomains[i].split(' ')[1];
-    let secondKey = firstKey.split('.').length === 3 ? `${firstKey.split('.')[1]}.${firstKey.split('.')[2]}` : firstKey.split('.').length === 2 ? firstKey.split('.')[1] : '';
-    let thirdKey = firstKey.split('.').length === 3 ? firstKey.split('.')[2] : '';
+    let secondKey = firstKey.split('.').length > 2 ? `${firstKey.split('.')[1]}.${firstKey.split('.')[2]}` : firstKey.split('.').length > 1 ? firstKey.split('.')[1] : '';
+    let thirdKey = firstKey.split('.').length > 2 ? firstKey.split('.')[2] : '';
     // console.log('firstkey', firstKey)
-    //console.log('secondKey', secondKey)
-    //console.log('thirdKey', thirdKey)
+    // console.log('secondKey', secondKey)
+    // console.log('thirdKey', thirdKey)
 
 
+    //It's the third key! something with ca1225, undefined!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+
+    // Also has something to do with order II think in the first section of three key assignments.  I think the code catches up during the loops for the console.log, but the order doesn't work for the last variaible, which is why it iis a test case and II am stuck. Thank christ i got this to work already.
     if (hash.has(firstKey) && firstKey.split('.').length === 3) {
+      //secondKey = firstKey.split('.')[1];
+      //thirdKey = `${firstKey.split('.')[1]}.${firstKey.split('.')[2]}`;
       hash.set(firstKey, hash.get(firstKey) + count)
       hash.set(secondKey, hash.get(secondKey) + count)
       hash.set(thirdKey, hash.get(thirdKey) + count)
     } else if (!hash.has(firstKey) && firstKey.split('.').length === 3) {
       hash.set(firstKey, count)
+      //secondKey = firstKey.split('.')[1];
+      //thirdKey = `${firstKey.split('.')[1]}.${firstKey.split('.')[2]}`;
       if (hash.has(thirdKey)) {
         hash.set(thirdKey, hash.get(thirdKey) + count)
       } else {
@@ -116,16 +125,19 @@ const subdomainVisits = cpdomains => {
       }
     }
     else if (hash.has(firstKey) && firstKey.split('.').length === 2) {
+      //secondKey = firstKey.split('.')[1];
       hash.set(firstKey, hash.get(firstKey) + count)
       hash.set(secondKey + count)
     } else if (!hash.has(firstKey) && firstKey.split('.').length === 2) {
       hash.set(firstKey, count)
+      //secondKey = firstKey.split('.')[1];
       if (hash.has(secondKey)) {
         hash.set(secondKey, hash.get(secondKey) + count)
       } else {
         hash.set(secondKey, count)
       }
     }
+    console.log(i, hash.get('ca1225'), cpdomains.length)
   }
   let final = [...hash.entries()].map(result => `${result[1]} ${result[0]}`)
   return final
@@ -143,9 +155,9 @@ const subdomainVisits = cpdomains => {
 
 
 
-// let input = ["2777 nak.mkw.co", "654 yaw.lmm.ca", "3528 jyx.arz.us", "3215 bll.hoh.network", "408 tdt.zfz.network", "3322 xhe.team", "8342 srp.team", "9259 bfo.net", "3875 brk.ato.network", "2531 mce.ser.com", "2471 czb.us", "4806 xss.dfa.co", "654 yls.yjt.co", "767 irh.epf.us", "1501 ara.ca", "243 qay.network", "9103 vbo.org", "6890 bfo.network", "4296 xtb.jre.us", "2329 vva.qay.network", "9846 fuw.org", "4681 lwf.ytn.network", "1781 lbk.ksc.co", "7464 jpd.fff.co", "2740 xhe.org", "4602 weq.buf.team", "3055 fdy.jkx.com", "5705 mqa.wsv.net", "6629 vdu.bfo.team", "9897 lra.uyy.org", "8167 ahm.jre.team", "9374 jep.ato.co", "3624 vmv.epf.network", "6865 thk.net", "6920 tlc.dfa.us", "9372 hci.jia.network", "7968 gjf.network", "7292 zbl.ksc.net", "2862 coh.sci.net", "3855 yjt.network", "1387 hju.gbq.org", "817 sgp.htq.co", "2406 hkb.ocf.co", "622 wmt.cwn.net", "9172 zfz.net", "1523 suq.bhp.co", "9581 gqi.team", "2160 hsj.epf.org", "32 ulz.com", "1225 lmm.ca", "1137 ujs.qzi.co", "5041 cdf.hwu.us", "4126 lir.ajl.team", "3111 gdw.team", "8928 arz.org", "9531 hoh.co", "7344 czb.com", "2715 ubt.okv.us", "1110 kdd.znq.us", "5729 srp.com", "6122 nqk.srp.org", "7193 xth.fzx.ca", "3496 ytn.com", "3950 xuf.network", "4521 weh.bfo.us", "3262 mor.ixi.us", "4975 okv.com", "7089 ske.yls.com", "4198 xfs.okv.co", "2444 vks.gxz.team", "1789 xcf.zqy.ca", "7392 uyy.net", "3449 tfm.us", "5907 zfz.us", "9530 omu.network", "3314 ytd.hkt.net", "9523 wyv.cgl.network", "4439 gtu.us", "8390 zqk.network", "1627 bhp.ca", "3609 bhp.team", "8557 uai.lfn.net", "2913 ret.ych.ca", "2447 ksc.com", "7476 cze.yvr.net", "8544 xrj.bhp.com", "6129 hkt.com", "8274 ulz.co", "9219 tfm.ca", "5016 zwv.gqi.co", "5738 lar.bfo.team", "3377 jkx.network", "2979 bhp.org", "8176 ujm.gqs.ca", "84 lmm.network", "3090 ycc.yjt.us", "7042 btv.com", "2965 gxj.org", "8263 cwn.org", "1873 kse.gjf.ca"]
+let input = ["2777 nak.mkw.co", "654 yaw.lmm.ca", "3528 jyx.arz.us", "3215 bll.hoh.network", "408 tdt.zfz.network", "3322 xhe.team", "8342 srp.team", "9259 bfo.net", "3875 brk.ato.network", "2531 mce.ser.com", "2471 czb.us", "4806 xss.dfa.co", "654 yls.yjt.co", "767 irh.epf.us", "1501 ara.ca", "243 qay.network", "9103 vbo.org", "6890 bfo.network", "4296 xtb.jre.us", "2329 vva.qay.network", "9846 fuw.org", "4681 lwf.ytn.network", "1781 lbk.ksc.co", "7464 jpd.fff.co", "2740 xhe.org", "4602 weq.buf.team", "3055 fdy.jkx.com", "5705 mqa.wsv.net", "6629 vdu.bfo.team", "9897 lra.uyy.org", "8167 ahm.jre.team", "9374 jep.ato.co", "3624 vmv.epf.network", "6865 thk.net", "6920 tlc.dfa.us", "9372 hci.jia.network", "7968 gjf.network", "7292 zbl.ksc.net", "2862 coh.sci.net", "3855 yjt.network", "1387 hju.gbq.org", "817 sgp.htq.co", "2406 hkb.ocf.co", "622 wmt.cwn.net", "9172 zfz.net", "1523 suq.bhp.co", "9581 gqi.team", "2160 hsj.epf.org", "32 ulz.com", "1225 lmm.ca", "1137 ujs.qzi.co", "5041 cdf.hwu.us", "4126 lir.ajl.team", "3111 gdw.team", "8928 arz.org", "9531 hoh.co", "7344 czb.com", "2715 ubt.okv.us", "1110 kdd.znq.us", "5729 srp.com", "6122 nqk.srp.org", "7193 xth.fzx.ca", "3496 ytn.com", "3950 xuf.network", "4521 weh.bfo.us", "3262 mor.ixi.us", "4975 okv.com", "7089 ske.yls.com", "4198 xfs.okv.co", "2444 vks.gxz.team", "1789 xcf.zqy.ca", "7392 uyy.net", "3449 tfm.us", "5907 zfz.us", "9530 omu.network", "3314 ytd.hkt.net", "9523 wyv.cgl.network", "4439 gtu.us", "8390 zqk.network", "1627 bhp.ca", "3609 bhp.team", "8557 uai.lfn.net", "2913 ret.ych.ca", "2447 ksc.com", "7476 cze.yvr.net", "8544 xrj.bhp.com", "6129 hkt.com", "8274 ulz.co", "9219 tfm.ca", "5016 zwv.gqi.co", "5738 lar.bfo.team", "3377 jkx.network", "2979 bhp.org", "8176 ujm.gqs.ca", "84 lmm.network", "3090 ycc.yjt.us", "7042 btv.com", "2965 gxj.org", "8263 cwn.org", "1873 kse.gjf.ca"]
 
-// //console.log(subdomainVisits(input))
+console.log(subdomainVisits(input))
 
 // console.log(input.sort((a, b) => {
 //   return parseInt(a.split(' ')[0]) - parseInt(b.split(' ')[0])
@@ -153,3 +165,11 @@ const subdomainVisits = cpdomains => {
 // console.log(test2.sort((a, b) => {
 //   return parseInt(a.split(' ')[0]) - parseInt(b.split(' ')[0])
 // }))
+
+
+// console.log(input.forEach(item => {
+//   console.log(typeof parseInt(item.split(' ')[0]), parseInt(item.split(' ')[0]))
+// }));
+// console.log(test2.forEach(item => {
+//   console.log(typeof parseInt(item.split(' ')[0]))
+// }));
