@@ -87,61 +87,69 @@ const { parse } = require("mustache");
 //This finally works!! I have a few goals of refactoring, so I am going to do them in steps, and prove them one at a time. So I am going to start by copying the above code, commenting the above code out, and work on a new set below. This refactor goal is: the code is so ugly with all of the comparisons of split.blahblahblah. lets set those to variables. The problem I had with this was what if they don't have the length property i want, it should break right? I am hoping i found a ternary solution.
 
 
-const subdomainVisits = cpdomains => {
-  let hash = new Map();
-  for (let i = 0; i < cpdomains.length; i++) {
-    let count = parseInt(cpdomains[i].split(' ')[0])
-    let firstKey = cpdomains[i].split(' ')[1];
-    let secondKey = firstKey.split('.').length > 2 ? `${firstKey.split('.')[1]}.${firstKey.split('.')[2]}` : firstKey.split('.').length > 1 ? firstKey.split('.')[1] : '';
-    let thirdKey = firstKey.split('.').length > 2 ? firstKey.split('.')[2] : '';
-    // console.log('firstkey', firstKey)
-    // console.log('secondKey', secondKey)
-    // console.log('thirdKey', thirdKey)
+// const subdomainVisits = cpdomains => {
+//   let hash = new Map();
+//   console.log(cpdomains[49])
+//   for (let i = 0; i < cpdomains.length; i++) {
+//     let count = parseInt(cpdomains[i].split(' ')[0])
+//     let firstKey = cpdomains[i].split(' ')[1];
+//     let secondKey = firstKey.split('.').length > 2 ? `${firstKey.split('.')[1]}.${firstKey.split('.')[2]}` : firstKey.split('.').length > 1 ? firstKey.split('.')[1] : '';
+//     let thirdKey = firstKey.split('.').length > 2 ? firstKey.split('.')[2] : '';
+//     // console.log('firstkey', firstKey)
+//     // console.log('secondKey', secondKey)
+//     // console.log('thirdKey', thirdKey)
+//     //if (i === 49) console.log('count: ', count, 'firstkey:', firstKey, 'secondKey:', secondKey, 'thirdkey:', thirdKey)
 
 
-    //It's the third key! something with ca1225, undefined!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//     //It's the third key! something with ca1225, undefined!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-    // Also has something to do with order II think in the first section of three key assignments.  I think the code catches up during the loops for the console.log, but the order doesn't work for the last variaible, which is why it iis a test case and II am stuck. Thank christ i got this to work already.
-    if (hash.has(firstKey) && firstKey.split('.').length === 3) {
-      //secondKey = firstKey.split('.')[1];
-      //thirdKey = `${firstKey.split('.')[1]}.${firstKey.split('.')[2]}`;
-      hash.set(firstKey, hash.get(firstKey) + count)
-      hash.set(secondKey, hash.get(secondKey) + count)
-      hash.set(thirdKey, hash.get(thirdKey) + count)
-    } else if (!hash.has(firstKey) && firstKey.split('.').length === 3) {
-      hash.set(firstKey, count)
-      //secondKey = firstKey.split('.')[1];
-      //thirdKey = `${firstKey.split('.')[1]}.${firstKey.split('.')[2]}`;
-      if (hash.has(thirdKey)) {
-        hash.set(thirdKey, hash.get(thirdKey) + count)
-      } else {
-        hash.set(thirdKey, count)
-      }
-      if (hash.has(secondKey)) {
-        hash.set(secondKey, hash.get(secondKey) + count)
-      } else {
-        hash.set(secondKey, count)
-      }
-    }
-    else if (hash.has(firstKey) && firstKey.split('.').length === 2) {
-      //secondKey = firstKey.split('.')[1];
-      hash.set(firstKey, hash.get(firstKey) + count)
-      hash.set(secondKey + count)
-    } else if (!hash.has(firstKey) && firstKey.split('.').length === 2) {
-      hash.set(firstKey, count)
-      //secondKey = firstKey.split('.')[1];
-      if (hash.has(secondKey)) {
-        hash.set(secondKey, hash.get(secondKey) + count)
-      } else {
-        hash.set(secondKey, count)
-      }
-    }
-    console.log(i, hash.get('ca1225'), cpdomains.length)
-  }
-  let final = [...hash.entries()].map(result => `${result[1]} ${result[0]}`)
-  return final
-};
+//     // Also has something to do with order II think in the first section of three key assignments.  I think the code catches up during the loops for the console.log, but the order doesn't work for the last variaible, which is why it iis a test case and II am stuck. Thank christ i got this to work already.
+//     if (hash.has(firstKey) && firstKey.split('.').length === 3) {
+//       //secondKey = firstKey.split('.')[1];
+//       //thirdKey = `${firstKey.split('.')[1]}.${firstKey.split('.')[2]}`;
+//       hash.set(firstKey, hash.get(firstKey) + count)
+//       hash.set(secondKey, hash.get(secondKey) + count)
+//       hash.set(thirdKey, hash.get(thirdKey) + count)
+//     } else if (!hash.has(firstKey) && firstKey.split('.').length === 3) {
+//       hash.set(firstKey, count)
+//       //secondKey = firstKey.split('.')[1];
+//       //thirdKey = `${firstKey.split('.')[1]}.${firstKey.split('.')[2]}`;
+//       if (hash.has(thirdKey)) {
+//         hash.set(thirdKey, hash.get(thirdKey) + count)
+//       } else {
+//         hash.set(thirdKey, count)
+//       }
+//       if (hash.has(secondKey)) {
+//         hash.set(secondKey, hash.get(secondKey) + count)
+//       } else {
+//         hash.set(secondKey, count)
+//       }
+//     }
+//     else if (hash.has(firstKey) && firstKey.split('.').length === 2) {
+//       //secondKey = firstKey.split('.')[1];
+//       // if (i === 49) console.log('count: 1', count, 'firstkey:', firstKey, 'secondKey:', secondKey, 'thirdkey:', thirdKey)
+//       hash.set(firstKey, hash.get(firstKey) + count)
+//       console.log(hash.get(firstKey))
+//       hash.set(secondKey, hash.get(secondKey) + count)
+//       console.log(hash.get(secondKey))
+//     } else if (!hash.has(firstKey) && firstKey.split('.').length === 2) {
+//       // if (i === 49) console.log('count: 2', count, 'firstkey:', firstKey, 'secondKey:', secondKey, 'thirdkey:', thirdKey)
+//       hash.set(firstKey, count)
+//       //secondKey = firstKey.split('.')[1];
+//       if (hash.has(secondKey)) {
+//         // if (i === 49) console.log('count: 3', count, 'firstkey:', firstKey, 'secondKey:', secondKey, 'thirdkey:', thirdKey)
+//         hash.set(secondKey, hash.get(secondKey) + count)
+//       } else {
+//         // if (i === 49) console.log('count: 4', count, 'firstkey:', firstKey, 'secondKey:', secondKey, 'thirdkey:', thirdKey)
+//         hash.set(secondKey, count)
+//       }
+//     }
+//     //console.log(i, hash)
+//   }
+//   let final = [...hash.entries()].map(result => `${result[1]} ${result[0]}`)
+//   return final
+// };
 
 //The below code is a test case from leetcode. My refactor works fine on local machine and passes a few cases on leetcode, but for some reson fails on that this one. Work in progress.
 
@@ -157,7 +165,7 @@ const subdomainVisits = cpdomains => {
 
 let input = ["2777 nak.mkw.co", "654 yaw.lmm.ca", "3528 jyx.arz.us", "3215 bll.hoh.network", "408 tdt.zfz.network", "3322 xhe.team", "8342 srp.team", "9259 bfo.net", "3875 brk.ato.network", "2531 mce.ser.com", "2471 czb.us", "4806 xss.dfa.co", "654 yls.yjt.co", "767 irh.epf.us", "1501 ara.ca", "243 qay.network", "9103 vbo.org", "6890 bfo.network", "4296 xtb.jre.us", "2329 vva.qay.network", "9846 fuw.org", "4681 lwf.ytn.network", "1781 lbk.ksc.co", "7464 jpd.fff.co", "2740 xhe.org", "4602 weq.buf.team", "3055 fdy.jkx.com", "5705 mqa.wsv.net", "6629 vdu.bfo.team", "9897 lra.uyy.org", "8167 ahm.jre.team", "9374 jep.ato.co", "3624 vmv.epf.network", "6865 thk.net", "6920 tlc.dfa.us", "9372 hci.jia.network", "7968 gjf.network", "7292 zbl.ksc.net", "2862 coh.sci.net", "3855 yjt.network", "1387 hju.gbq.org", "817 sgp.htq.co", "2406 hkb.ocf.co", "622 wmt.cwn.net", "9172 zfz.net", "1523 suq.bhp.co", "9581 gqi.team", "2160 hsj.epf.org", "32 ulz.com", "1225 lmm.ca", "1137 ujs.qzi.co", "5041 cdf.hwu.us", "4126 lir.ajl.team", "3111 gdw.team", "8928 arz.org", "9531 hoh.co", "7344 czb.com", "2715 ubt.okv.us", "1110 kdd.znq.us", "5729 srp.com", "6122 nqk.srp.org", "7193 xth.fzx.ca", "3496 ytn.com", "3950 xuf.network", "4521 weh.bfo.us", "3262 mor.ixi.us", "4975 okv.com", "7089 ske.yls.com", "4198 xfs.okv.co", "2444 vks.gxz.team", "1789 xcf.zqy.ca", "7392 uyy.net", "3449 tfm.us", "5907 zfz.us", "9530 omu.network", "3314 ytd.hkt.net", "9523 wyv.cgl.network", "4439 gtu.us", "8390 zqk.network", "1627 bhp.ca", "3609 bhp.team", "8557 uai.lfn.net", "2913 ret.ych.ca", "2447 ksc.com", "7476 cze.yvr.net", "8544 xrj.bhp.com", "6129 hkt.com", "8274 ulz.co", "9219 tfm.ca", "5016 zwv.gqi.co", "5738 lar.bfo.team", "3377 jkx.network", "2979 bhp.org", "8176 ujm.gqs.ca", "84 lmm.network", "3090 ycc.yjt.us", "7042 btv.com", "2965 gxj.org", "8263 cwn.org", "1873 kse.gjf.ca"]
 
-console.log(subdomainVisits(input))
+//console.log(subdomainVisits(input))
 
 // console.log(input.sort((a, b) => {
 //   return parseInt(a.split(' ')[0]) - parseInt(b.split(' ')[0])
@@ -173,3 +181,36 @@ console.log(subdomainVisits(input))
 // console.log(test2.forEach(item => {
 //   console.log(typeof parseInt(item.split(' ')[0]))
 // }));
+
+
+const subdomainVisits = cpdomains => {
+  let hash = new Map();
+  for (let i = 0; i < cpdomains.length; i++) {
+    let count = parseInt(cpdomains[i].split(' ')[0])
+    let firstKey = cpdomains[i].split(' ')[1];
+    let secondKey = firstKey.split('.').length > 2 ? `${firstKey.split('.')[1]}.${firstKey.split('.')[2]}` : firstKey.split('.').length > 1 ? firstKey.split('.')[1] : '';
+    let thirdKey = firstKey.split('.').length > 2 ? firstKey.split('.')[2] : '';
+
+    if (hash.has(firstKey) && firstKey.split('.').length === 3) {
+      hash.set(firstKey, hash.get(firstKey) + count)
+      hash.set(secondKey, hash.get(secondKey) + count)
+      hash.set(thirdKey, hash.get(thirdKey) + count)
+    } else if (!hash.has(firstKey) && firstKey.split('.').length === 3) {
+      hash.set(firstKey, count)
+      if (hash.has(thirdKey)) hash.set(thirdKey, hash.get(thirdKey) + count)
+      else hash.set(thirdKey, count)
+      if (hash.has(secondKey)) hash.set(secondKey, hash.get(secondKey) + count)
+      else hash.set(secondKey, count)
+    }
+    else if (hash.has(firstKey) && firstKey.split('.').length === 2) {
+      hash.set(firstKey, hash.get(firstKey) + count)
+      hash.set(secondKey, hash.get(secondKey) + count)
+    } else if (!hash.has(firstKey) && firstKey.split('.').length === 2) {
+      hash.set(firstKey, count)
+      if (hash.has(secondKey)) hash.set(secondKey, hash.get(secondKey) + count)
+      else hash.set(secondKey, count)
+    }
+  }
+  return [...hash.entries()].map(result => `${result[1]} ${result[0]}`)
+};
+console.log(subdomainVisits(input))
