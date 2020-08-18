@@ -47,6 +47,33 @@ const templateWithJQuery = () => {
   })
 }
 
+// const templateWithJQuery = () => {
+//   // Solution code here...
+//   $(starWarsPeople).each(index => {
+//     const $clonedSection = $('#template').clone();
+
+//     $clonedSection.find('h2').text(starWarsPeople[index].name);
+//     $clonedSection.find('h3').text(starWarsPeople[index].height);
+//     $clonedSection.find('p').text(starWarsPeople[2].eye_color);
+
+//     $('main').append($clonedSection);
+//   });
+// };
+
+
+
+// const templateWithJQuery = () => {
+//   starWarsPeople.forEach(person => {
+//     const template = $('#template').clone();
+//     template.attr('id', '');
+//     template.find('h2').text(person.name);
+//     template.find('h3').text(person.height);
+//     template.find('p').text(person.eye_color);
+//     $('main').append(template);
+//   })
+// }
+
+
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
 Write a function named howMuchPencil that takes in a string, as written on the side of a pencil.
