@@ -156,11 +156,29 @@ Write a function named splitFoods that uses split to produce the same output as 
 You may also use other string or array methods.
 ------------------------------------------------------------------------------------------------ */
 
+// const splitFoods = (recipe) => {
+//   let result = [];
+//   recipe.ingredients.forEach(element => {
+//     console.log(element)
+//     result.push(element.replace(/\d*\d\s\w+-*\w+\s/, ''));
+//   });
+//   return result;
+// };
 const splitFoods = (recipe) => {
   let result = [];
-  recipe.ingredients.forEach(element => {
-    result.push(element.replace(/\d*\d\s\w+-*\w+\s/, ''));
-  });
+  recipe.ingredients.forEach(value => {
+    let temp = value.split(' ');
+    if (temp.length === 3) {
+      console.log('three')
+      result.push(`${temp[2]}`)
+    } else if (temp.length === 4) {
+      console.log('four')
+      result.push(`${temp[2]} ${temp[3]}`)
+    } else if (temp.length === 5) {
+      console.log('five')
+      result.push(`${temp[2]} ${temp[3]} ${temp[4]}`)
+    }
+  })
   return result;
 };
 
