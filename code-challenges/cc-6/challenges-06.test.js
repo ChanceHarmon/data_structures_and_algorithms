@@ -150,6 +150,18 @@ const hasChildrenValues = (arr, character) => {
   return (kids);
 };
 
+// const hasChildrenValues = (arr, character) => {
+//   let thing = false;
+//   arr.forEach(char => {
+//     if (char.name === character && char.children.length) {
+//       console.log(char.name);
+//       thing = true;
+//     }
+//   });
+//   console.log(thing);
+//   return thing;
+// };
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5 - Stretch Goal
