@@ -120,7 +120,9 @@ const errands = [
   },
   {
     store: 'Pet store',
-    items: [{ name: 'Cans of food', quantity: 8 }, { name: 'Treats', quantity: 24 }, { name: 'Leash', quantity: 1 }]
+    items: [{ name: 'Cans of food', quantity: 8 },
+    { name: 'Treats', quantity: 24 },
+    { name: 'Leash', quantity: 1 }]
   }
 ];
 

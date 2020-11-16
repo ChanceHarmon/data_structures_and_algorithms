@@ -63,4 +63,13 @@ const rotate = matrix => {
       matrix[i][matrix.length - 1 - j] = pivot;
     }
   }
+  console.log('matrix', matrix)
+  return matrix
 };
+
+console.log(rotate([
+  [5, 1, 9, 11],
+  [2, 4, 8, 10],
+  [13, 3, 6, 7],
+  [15, 14, 12, 16]
+]))
