@@ -108,6 +108,37 @@ const divisibleByFiveTwoToThePower = (input) => {
 //     return accumulator + rowCount;
 //   }, 0);
 // };
+
+// const divisibleByFiveTwoToThePower = (input) => {
+//   // Solution code here...
+//   let arrModExp = input.reduce((acc, curr, idx, arr) => {
+//     // console.log(arr, arr.length);
+//     // console.log(curr, curr.length);
+//     for (let i = 0; i < curr.length; i++) {
+//       // console.log('CURRENT VALUE: ', curr[i]);
+//       // if (curr[i] % 5) { curr.splice(i, 1); }
+//       if (typeof (curr[i]) !== 'number') { curr.splice(i, 1, 'nullValue'); }
+//       else if (!(curr[i] % 5)) {
+//         console.log('divisible: ', curr[i]);
+//         curr.splice(i, 1, (2 ** curr[i]));
+//       }
+//       else {
+//         console.log('not divisible: ', curr[i]);
+//         curr.splice(i, 1, 'nullValue');
+//       }
+//     }
+//     for (let j = curr.length - 1; j >= 0; j--) {
+//       // console.log(curr[j]);
+//       if (curr[j] === 'nullValue') { curr.splice(j, 1); }
+//     }
+//     // console.log('CURRENT ARRAY: ', curr);
+//     acc.push(curr);
+//     return acc;
+//     // console.log('ACCUMULATOR ARRAY: ', acc);
+//   }, [])
+//   console.log('REDUCED ARRAY: ', arrModExp);
+//   return arrModExp;
+// };
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5 - Stretch Goal
 
