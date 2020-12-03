@@ -132,6 +132,13 @@ const seashells = 'She sells seashells by the seashore. The shells she sells are
 
 const findShells = str => str.match(/(sea)?(s)(h)?(ells)/g);
 
+// const findShells = (str) => {
+
+//   let shellPattern = /\b([A-Za-z]*ells)\b/g;
+//   return str.match(shellPattern);
+
+// };
+
 /* ------------------------------------------------------------------------------------------------
 TESTS
 

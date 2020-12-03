@@ -119,6 +119,15 @@ let starWarsData = [{
 
 let biggerThanLuke = (arr) => {
   return arr.filter(big => parseInt(big.height) > 172).map(big => big.name).join().replace(',', ' - ');
+
+  // if(arr.length > 0) {
+  // let check = arr.filter(big => parseInt(big.height) > 172)
+  // let string = `${check[0].name} - ${check[1].name}`;
+  // return string;
+  // } else {
+  //   return '';
+  // }
+
 };
 
 // let biggerThanLuke = (arr) => {
