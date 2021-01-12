@@ -10,7 +10,8 @@ There is also several leetcode challenges solved, specifically the most popular 
 
 # How to use this Repository
 
-There are no packages to install, just your favorite code editor. Use it for study and and any other projects. <br>
+Hopefully you have node installed, fingers crossed. When you clone the repository, run `npm install` to load the current test suite. Almost none of this has tests written, but for the few that do you can use `npm test <file-name>` after the install. This is something that I look to build out more in the future.<br>
+Use it for study and any other projects. <br>
 If you would like contribute to this project, feel free to contact me and I can add you as a collaborator. I just ask that <br>
 the structure follows the general theme of what is already here, ie ES6, a good explanation of the problem in the comments, <br>
 explanation of Big O to the best you understand it, and the thought process of how you arrived at the solution.
