@@ -40,7 +40,7 @@ const addValues = (arr, value) => {
 
 const addNumbers = (num, arr, times, callback) => {
   for (let i = 0; i < times; i++) {
-    callback(arr,num);
+    callback(arr, num);
   }
   return arr;
 };
@@ -58,7 +58,7 @@ Return the modified array.
 ------------------------------------------------------------------------------------------------ */
 
 const removeOne = (num, arr) => {
-  if (num %3 === 2) arr.pop();
+  if (num % 3 === 2) arr.pop();
 };
 
 const removeElements = (arr, callback) => {
@@ -142,9 +142,9 @@ Return the resulting output array.
 const fizzbuzz = (arr) => {
   const output = [];
   arr.forEach(num => {
-    if (num % 5 === 0 && num % 3 ===0) {
+    if (num % 5 === 0 && num % 3 === 0) {
       output.push('Fizz Buzz');
-    } else if (num % 3 ===0){
+    } else if (num % 3 === 0) {
       output.push('Fizz');
     } else if (num % 5 === 0) {
       output.push('Buzz');
@@ -154,6 +154,21 @@ const fizzbuzz = (arr) => {
   });
   return output;
 };
+
+//Below is a leetcode version asking a slightly different version. In this one you have to track i, and i is based on a single number given, instead of being given an array, and then checking the value at i. This will not pass the test if you comment it in. It is just here to show a variation on a the way a classic question could be presented. This messed me up way too long.
+
+// const fizzBuzz = n => {
+//   let result = [];
+//   for (let i = 0; i < n; i++) {
+//     if ((i + 1) % 5 === 0 && (i + 1) % 3 === 0) result.push("FizzBuzz")
+//     else if ((i + 1) % 5 === 0) result.push("Buzz")
+//     else if ((i + 1) % 3 === 0) result.push("Fizz")
+//     else {
+//       result.push(`${i + 1}`)
+//     }
+//   }
+//   return result;
+// };
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
