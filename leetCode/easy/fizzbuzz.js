@@ -32,7 +32,7 @@
 //     "FizzBuzz"
 // ]
 
-//Big O time: O(n) No matter what we have to consider n as our default loop time. This be infinite or 1.
+//Big O time: O(n) No matter what we have to consider n as our default loop time. This could be infinite or 1.
 //Big O space: O(n) Same rules apply. It is asking for an array back without one being provided in the arguement to return. So we have to create storage that could range from 0 - N.
 
 const fizzBuzz = n => {
