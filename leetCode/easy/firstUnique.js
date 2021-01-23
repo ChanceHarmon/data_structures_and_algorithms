@@ -36,6 +36,9 @@
 //Another thing to ask is if whitespace counts as a character. I am going to build in logic to account for it, because in reality you should have to know what to do wiith it, it is a character.
 
 
+//Big O time: O(n) While there are two loops, they are seperate in code. I assume the second one could be refactored a bit to be more specific to a hashmap method.
+//Big O space: O(n) We do create a hashmap for storage. The unique thing you could do to speed it up is define an object outside with keey values already defined. This would be possible for this problem because we already have been given told that it will all be a lower case characters for a test case, thus we would know we have a set amount of 26 key value pairs to define. If we defined this outside the real Big O of the function itself would be O(1);
+
 
 /**
  * @param {string} s
@@ -66,7 +69,7 @@ const firstUniqChar = s => {
 
 };
 
-// h/ index of 1 should be the correct output
+// h / index of 1 should be the correct output
 
 
 console.log(firstUniqChar('chance is still up'))
