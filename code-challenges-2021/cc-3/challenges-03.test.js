@@ -228,6 +228,16 @@ const sortSchedule = (arr) => {
   })
 };
 
+//Below does not pass
+// const sortSchedule = (arr) => {
+//   return arr.sort((a, b) => {
+//     if (a.start !== b.start) { return a.start - b.start }
+//     else if (a.start === b.start && a.end !== b.end) {
+//       return a.end - b.end
+//     }
+//   })
+// };
+
 /* ------------------------------------------------------------------------------------------------
 TESTS
 
