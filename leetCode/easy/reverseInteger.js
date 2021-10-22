@@ -27,3 +27,21 @@
 // Constraints:
 
 // -231 <= x <= 231 - 1
+
+const reverse = x => {
+
+    let temp = x.toString()
+    let flag = temp[0] === 'i' ? 1 : 0
+    let final = ''
+    if (temp[0] === '-') {
+        final += '-'
+        flag = 1
+    }
+    for (let i = temp.length - 1; i >= flag; i--) {
+        final += temp[i]
+    }
+    final = parseInt(final)
+
+    if (final < Math.pow(-2, 31) || final > Math.pow(2, 31)) return 0
+    else return final
+};
