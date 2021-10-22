@@ -39,7 +39,7 @@
 // Follow up: Could you implement a solution using only O(1) extra space complexity and O(n) runtime complexity?
 
 // Final Big O:
-// Big O time: O(n) Two seperated loops but vital ones. The sort is crucial to be able to keep space down, and if you can compare array index to an idex it is constant, so only the time needed to compared i to value at i is needed.
+// Big O time: O(n) Two seperated loops but vital ones. The sort is crucial to be able to keep space down, and if you can compare array index to an index it is constant, so only the time needed to compared i to value at i is needed.
 //Big O space: O(1) By sorting the array first we don't need to have a seperate array or object tracking what has been seen so far in the original array. I don't how you could do this without first sorting the array, you would have to pick one or the other for time V space on this challenge.
 
 
