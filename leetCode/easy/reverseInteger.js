@@ -26,7 +26,10 @@
 
 // Constraints:
 
-// -231 <= x <= 231 - 1
+// -2^31 <= x <= 2^31
+
+// Big O time: O(n) We maintain a single loop with all other conditionals being single operations.
+// Big O space: O(n) We use a few variables to store the cumulative return, best case is 0 and we we are at O(1)
 
 const reverse = x => {
 
